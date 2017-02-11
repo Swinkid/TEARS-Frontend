@@ -11,13 +11,13 @@ function initMap() {
     });
 
     var centerControlDiv = document.createElement('div');
-    var centerControl = new resourceControl(centerControlDiv, map);
+    var centerControl = new resourceControl(centerControlDiv, map, "<span class='glyphicon glyphicon-plus'></span>", "Open a new incident ticket.", "resource");
 
     centerControl.index = 1;
     map.controls[google.maps.ControlPosition.TOP_RIGHT].push(centerControlDiv);
 
     var centerControlDiv2 = document.createElement('div');
-    var centerControl2 = new resourceControl(centerControlDiv, map);
+    var centerControl2 = new resourceControl(centerControlDiv, map, "<span class='glyphicon glyphicon-eye-open'></span>", "View resources available.", "incident");
 
     centerControl2.index = 1;
     map.controls[google.maps.ControlPosition.TOP_RIGHT].push(centerControlDiv2);
@@ -38,23 +38,23 @@ function initMap() {
     }
 }
 
-function resourceControl(controlDiv, map) {
+function resourceControl(controlDiv, map, buttonText, buttonDescription, panelType) {
     var controlUI = document.createElement('div');
     controlUI.style.backgroundColor = '#fff';
-    controlUI.style.border = '2px solid #fff';
     controlUI.style.cursor = 'pointer';
     controlUI.style.textAlign = 'center';
-    controlUI.title = 'Click to recenter the map';
+    controlUI.title = buttonDescription;
     controlDiv.appendChild(controlUI);
-
-    // Set CSS for the control interior.
     var controlText = document.createElement('div');
     controlText.style.color = 'rgb(25,25,25)';
     controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
-    controlText.style.fontSize = '16px';
+    controlText.style.fontSize = '20px';
     controlText.style.lineHeight = '38px';
-    controlText.style.paddingLeft = '5px';
-    controlText.style.paddingRight = '5px';
-    controlText.innerHTML = 'Center Map';
+    controlText.style.padding = '5px';
+    controlText.innerHTML = buttonText;
     controlUI.appendChild(controlText);
+
+    controlUI.addEventListener('click', function() {
+        openPanel(panelType);
+    });
 }
