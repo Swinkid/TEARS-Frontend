@@ -1,17 +1,23 @@
 var CONTENT_CLASS = ".content";
+var PROPERTIES_PANEL_CLASS = ".properties-bar";
 var propertiesOpen = false;
 var lastPanel = "";
 
+
+$(document).ready(function () {
+
+});
+
 function togglePanel(panelType){
     if(propertiesOpen && lastPanel == panelType){
-        $('.properties-bar').addClass("hidden");
+        $(PROPERTIES_PANEL_CLASS).addClass("hidden");
         $(CONTENT_CLASS).removeClass("col-sm-7");
         $(CONTENT_CLASS).removeClass("col-md-6");
         $(CONTENT_CLASS).addClass("col-sm-9");
         $(CONTENT_CLASS).addClass("col-md-10");
         google.maps.event.trigger(map, "resize");
     } else {
-        $('.properties-bar').addClass("hidden");
+        $(PROPERTIES_PANEL_CLASS).addClass("hidden");
         $(CONTENT_CLASS).addClass("col-sm-7");
         $(CONTENT_CLASS).addClass("col-md-6");
         $(CONTENT_CLASS).removeClass("col-sm-9");

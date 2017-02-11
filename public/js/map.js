@@ -45,12 +45,11 @@ function resourceControl(controlDiv, map, buttonText, buttonDescription, panelTy
     controlUI.style.textAlign = 'center';
     controlUI.title = buttonDescription;
     controlDiv.appendChild(controlUI);
+
     var controlText = document.createElement('div');
     controlText.style.color = 'rgb(25,25,25)';
-    controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
     controlText.style.fontSize = '20px';
-    controlText.style.lineHeight = '38px';
-    controlText.style.padding = '5px';
+    controlText.style.padding = '10px';
     controlText.innerHTML = buttonText;
     controlUI.appendChild(controlText);
 

@@ -55,20 +55,61 @@
 		<div class="row">
 			<div class="col-md-12">
 				<ul class="nav nav-tabs">
-					<li class="active"><a href="#">Incident Details</a></li>
-					<li><a href="#">Warnings</a></li>
-					<li><a href="#">Dispatch</a></li>
+					<li class="active"><a data-toggle="tab" href="#incidentDetails" onclick="test()">Incident Details</a></li>
+					<li><a data-toggle="tab" href="#incidentWarnings">Warnings</a></li>
+					<li><a data-toggle="tab" href="#incidentDispatch">Dispatch</a></li>
 				</ul>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-12">
 
+				<div class="tab-content">
+					<div id="incidentDetails" class="tab-pane active">
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+					</div>
+					<div id="incidentWarnings" class="tab-pane">
+						<p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+					</div>
+					<div id="incidentDispatch" class="tab-pane">
+						<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
 	<div class="col-sm-2 col-md-4 properties-bar resource hidden">
 		<h1>Resources</h1>
+		<table class="table table-striped">
+			<thead>
+			<tr>
+				<th>Call Sign</th>
+				<th>Status</th>
+				<th>Officer Name</th>
+				<th>Last Update</th>
+				<th></th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr>
+				<td>XXXX1</td>
+				<td>Available</td>
+				<td>J. Carter</td>
+				<td>1 min</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>XXXX1</td>
+				<td>Available</td>
+				<td>J. Carter</td>
+				<td>1 min</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>XXXX1</td>
+				<td>Available</td>
+				<td>J. Carter</td>
+				<td>1 min</td>
+				<td></td>
+			</tr>
+			</tbody>
+		</table>
 	</div>
 </div>
 
