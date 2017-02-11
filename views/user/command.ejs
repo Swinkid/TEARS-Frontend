@@ -8,11 +8,20 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
+	<script src="/socket.io/socket.io.js"></script>
+	<script>
+        var socket = io('http://localhost:3001');
+        socket.on('news', function (data) {
+            console.log(data);
+            socket.emit('my other event', { my: 'data' });
+        });
+	</script>
 	<style>
 		#map {
 			height: 100%;
-			width: 100%;
 		}
+
+
 	</style>
 </head>
 <body>
@@ -42,19 +51,34 @@
 						<li class="active"><a href="/command"><span class="glyphicon glyphicon-lock"></span> Command & Control</a></li>
 						<li><a href="#"><span class="glyphicon glyphicon-envelope"></span> Messages <span class="badge pull-right">42</span></a></li>
 						<li><a href=""><span class="glyphicon glyphicon-cog"></span> Preferences</a></li>
+						<li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
 					</ul>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="col-sm-9 col-md-10 content">
+	<div class="col-sm-7 col-md-6 content">
 		<div id="map"></div>
 	</div>
+	<div class="col-sm-2 col-md-4 properties-bar">
+		<button type="button" class="close" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+
+
+	<!--<div class="col-sm-9 col-md-10 content">
+		<div id="map"></div>
+	</div>
+	<div class="col-sm-2 col-md-4 properties-bar" style="display: none;">
+
+	</div>-->
 </div>
 
 <script src="/js/map.js"></script>
+<script src="/js/ui.js"></script>
 <script async defer
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2Cik34G3VyRJnSeWNz3OuJCIHMkE6pmQ&callback=initMap">
+		src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyB2Cik34G3VyRJnSeWNz3OuJCIHMkE6pmQ&callback=initMap">
 </script>
 </body>
 </html>

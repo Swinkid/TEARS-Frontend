@@ -26,7 +26,10 @@ router.post('/signup', passport.authenticate('signup', {
     failureFlash: true
 }));
 
-
+router.get('/logout', function(req, res){
+    req.logout();
+    res.redirect('/');
+});
 
 router.get('/signup', function(req, res) {
     res.render('signup.ejs', { message: req.flash('signupMessage') });
