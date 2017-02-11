@@ -1,8 +1,126 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+.page-header {
+    margin: 0;
+    border: 0;
 }
 
-a {
-  color: #00B7FF;
+#map {
+    height: 100%;
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .content .container {
+        width: 700px;
+    }
+
+    html, body {
+        background-color: #f8f8f8;
+        height: 100%;
+        overflow: hidden;
+    }
+
+    .content .container .page-header {
+        margin-top: 0;
+    }
+
+    .sidebar-nav {
+        position: fixed;
+        width: inherit;
+    }
+
+    .sidebar {
+        padding-right: 0;
+        font-size: small;
+        padding-left: 0;
+    }
+
+    .content {
+        height: 100%;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .content {
+        background-color: white;
+    }
+
+    .sidebar-nav .navbar .navbar-collapse {
+        padding: 0;
+        max-height: none;
+    }
+
+    .sidebar-nav .navbar {
+        border-radius: 0;
+        margin-bottom: 0;
+        border: 0;
+    }
+
+    .sidebar-nav .navbar ul {
+        float: none;
+        display: block;
+    }
+
+    .sidebar-nav .navbar li {
+        float: none;
+        display: block;
+    }
+
+    .sidebar-nav .navbar li a {
+        padding-top: 12px;
+        padding-bottom: 12px;
+    }
+}
+
+@media (min-width: 769px) {
+    .content .container {
+        width: 600px;
+    }
+
+    .content .container .page-header {
+        margin-top: 0;
+    }
+}
+
+@media (min-width: 992px) {
+    .content .container {
+        width: 900px;
+    }
+
+    .content .container .page-header {
+        margin-top: 0;
+    }
+}
+
+@media (min-width: 1220px) {
+    .content {
+        overflow: auto;
+    }
+
+    .content .container {
+        width: 1000px;
+    }
+
+    .content .container .page-header {
+        margin-top: 0;
+    }
+    .content {
+        padding: 0 0;
+    }
+
+    .navbar-nav {
+        margin: 0;
+    }
+
+    .navbar-collapse {
+        padding: 0;
+    }
+
+    .sidebar-nav .navbar li a:hover {
+        background-color: #428bca;
+        color: white;
+    }
+
+    .sidebar-nav .navbar li a > .caret {
+        margin-top: 8px;
+    }
 }
