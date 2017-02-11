@@ -11,13 +11,13 @@ function initMap() {
     });
 
     var centerControlDiv = document.createElement('div');
-    var centerControl = new resourceControl(centerControlDiv, map, "<span class='glyphicon glyphicon-plus'></span>", "Open a new incident ticket.", "resource");
+    var centerControl = new resourceControl(centerControlDiv, map, "<span class='glyphicon glyphicon-plus'></span>", "Open a new incident ticket.", "incident");
 
     centerControl.index = 1;
     map.controls[google.maps.ControlPosition.TOP_RIGHT].push(centerControlDiv);
 
     var centerControlDiv2 = document.createElement('div');
-    var centerControl2 = new resourceControl(centerControlDiv, map, "<span class='glyphicon glyphicon-eye-open'></span>", "View resources available.", "incident");
+    var centerControl2 = new resourceControl(centerControlDiv, map, "<span class='glyphicon glyphicon-eye-open'></span>", "View resources available.", "resource");
 
     centerControl2.index = 1;
     map.controls[google.maps.ControlPosition.TOP_RIGHT].push(centerControlDiv2);
@@ -55,6 +55,6 @@ function resourceControl(controlDiv, map, buttonText, buttonDescription, panelTy
     controlUI.appendChild(controlText);
 
     controlUI.addEventListener('click', function() {
-        openPanel(panelType);
+        togglePanel(panelType);
     });
 }
