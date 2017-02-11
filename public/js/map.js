@@ -11,13 +11,13 @@ function initMap() {
     });
 
     var centerControlDiv = document.createElement('div');
-    var centerControl = new resourceControl(centerControlDiv, map, "<span class='glyphicon glyphicon-plus'></span>", "Open a new incident ticket.", "incident");
+    var centerControl = new resourceControl(centerControlDiv, map, "<span class='glyphicon glyphicon-plus'></span>", "Open a new incident ticket.", "incident", "#f8f8f8");
 
     centerControl.index = 1;
     map.controls[google.maps.ControlPosition.TOP_RIGHT].push(centerControlDiv);
 
     var centerControlDiv2 = document.createElement('div');
-    var centerControl2 = new resourceControl(centerControlDiv, map, "<span class='glyphicon glyphicon-eye-open'></span>", "View resources available.", "resource");
+    var centerControl2 = new resourceControl(centerControlDiv, map, "<span class='glyphicon glyphicon-eye-open'></span>", "View resources available.", "resource", "#f8f8f8");
 
     centerControl2.index = 1;
     map.controls[google.maps.ControlPosition.TOP_RIGHT].push(centerControlDiv2);
@@ -38,9 +38,9 @@ function initMap() {
     }
 }
 
-function resourceControl(controlDiv, map, buttonText, buttonDescription, panelType) {
+function resourceControl(controlDiv, map, buttonText, buttonDescription, panelType, bgColor) {
     var controlUI = document.createElement('div');
-    controlUI.style.backgroundColor = '#fff';
+    controlUI.style.backgroundColor = bgColor;
     controlUI.style.cursor = 'pointer';
     controlUI.style.textAlign = 'center';
     controlUI.title = buttonDescription;

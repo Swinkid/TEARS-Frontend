@@ -27,6 +27,7 @@ function togglePanel(panelType){
         }
     }
 
+    google.maps.event.trigger(map, "resize");
     propertiesOpen = !propertiesOpen;
     lastPanel = panelType;
 }
