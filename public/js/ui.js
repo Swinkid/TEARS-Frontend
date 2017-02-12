@@ -3,11 +3,6 @@ var PROPERTIES_PANEL_CLASS = ".properties-bar";
 var propertiesOpen = false;
 var lastPanel = "";
 
-
-$(document).ready(function () {
-
-});
-
 function togglePanel(panelType){
     if(propertiesOpen && lastPanel == panelType){
         $(PROPERTIES_PANEL_CLASS).addClass("hidden");
@@ -36,4 +31,12 @@ function togglePanel(panelType){
     google.maps.event.trigger(map, "resize");
     propertiesOpen = !propertiesOpen;
     lastPanel = panelType;
+}
+
+function fetchWarnings(){
+    $("#incidentWarnings").empty();
+}
+
+function fetchIncidentDispatch(){
+
 }

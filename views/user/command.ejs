@@ -1,48 +1,9 @@
-<html>
-<head>
-	<title></title>
+<% include ../partials/header.ejs %>
 
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-	<link rel="stylesheet" href="/stylesheets/style.css">
-
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
-	<script src="/socket.io/socket.io.js"></script>
-</head>
-<body>
 <div clas="row">
-	<div class="col-sm-3 col-md-2 sidebar">
-		<div class="sidebar-nav">
-			<div class="navbar navbar-default" role="navigation">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".sidebar-navbar-collapse">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-					<span class="visible-xs navbar-brand">Sidebar menu</span>
-				</div>
-				<div class="navbar-collapse sidebar-navbar-collapse collapse" style="height: 1px;">
-					<ul class="nav navbar-nav" id="sidenav01">
-						<li class="active">
-							<a href="#" data-toggle="collapse" data-target="#toggleDemo0" data-parent="#sidenav01" class="collapsed">
-								<h4>
-									Dashboard
-								</h4>
-							</a>
-						</li>
-						<li><a href="/dashboard"><span class="glyphicon glyphicon-lock"></span> Dashboard</a></li>
-						<li class="active"><a href="/command"><span class="glyphicon glyphicon-lock"></span> Command & Control</a></li>
-						<li><a href="#"><span class="glyphicon glyphicon-envelope"></span> Messages <span class="badge pull-right">42</span></a></li>
-						<li><a href=""><span class="glyphicon glyphicon-cog"></span> Preferences</a></li>
-						<li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</div>
+
+	<% include ../partials/navigation.ejs %>
+
 	<div class="col-sm-9 col-md-10 content">
 		<div id="map"></div>
 	</div>
@@ -56,18 +17,38 @@
 			<div class="col-md-12">
 				<ul class="nav nav-tabs">
 					<li class="active"><a data-toggle="tab" href="#incidentDetails" onclick="test()">Incident Details</a></li>
-					<li><a data-toggle="tab" href="#incidentWarnings">Warnings</a></li>
-					<li><a data-toggle="tab" href="#incidentDispatch">Dispatch</a></li>
+					<li><a data-toggle="tab" href="#incidentWarnings" onclick="fetchWarnings()">Warnings</a></li>
+					<li><a data-toggle="tab" href="#incidentDispatch" onclick="fetchIncidentDispatch()">Dispatch</a></li>
 				</ul>
 
 				<div class="tab-content">
 					<div id="incidentDetails" class="tab-pane active">
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+						<form>
+							<div class="form-group">
+								<label for="incidentLocation">Location</label>
+								<input type="text" class="form-control" name="incidentLocation">
+							</div>
+							<div class="form-group">
+
+							</div>
+							<div class="form-group">
+
+							</div>
+							<div class="form-group">
+
+							</div>
+							<div class="form-group">
+
+							</div>
+							<div class="form-group">
+
+							</div>
+						</form>
 					</div>
 					<div id="incidentWarnings" class="tab-pane">
 						<p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
 					</div>
-					<div id="incidentDispatch" class="tab-pane">
+					<div id="incidentDispatch"  class="tab-pane">
 						<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
 					</div>
 				</div>
@@ -113,11 +94,4 @@
 	</div>
 </div>
 
-<script src="/js/map.js"></script>
-<script src="/js/ui.js"></script>
-<script src="/js/socket.js"></script>
-<script async defer
-		src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyB2Cik34G3VyRJnSeWNz3OuJCIHMkE6pmQ&callback=initMap">
-</script>
-</body>
-</html>
+<% include ../partials/footer.ejs %>
