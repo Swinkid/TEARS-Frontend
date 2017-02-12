@@ -13,6 +13,7 @@ var session = require('express-session');
 mongoose.connect(config.database);
 
 var index = require('./routes/index');
+var api = require('./routes/api');
 
 var app = express();
 
@@ -38,6 +39,7 @@ app.use(flash());
 require('./auth/local')(passport);
 
 app.use('/', index);
+app.use('/api', api);
 
 
 app.use(function(req, res, next) {
