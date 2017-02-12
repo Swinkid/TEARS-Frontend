@@ -4,8 +4,6 @@ var router = express.Router();
 var Config = require('../config');
 var http = require('http');
 
-//TODO: Protect Endpoints
-
 router.get('/resources', isAuthenticated, function(req, res, next) {
     var requestOptions = {
         host : Config.backend,

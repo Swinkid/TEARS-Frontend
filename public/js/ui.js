@@ -54,14 +54,16 @@ function fetchIncidentDispatch(){
 function refreshResourcesTable(){
     $('.resourcesList tbody').empty();
     $.getJSON("/api/resources", function (data) {
-        $.each(data, function(key, value){
-            $('.resourcesList tbody').append("<tr>" +
-                "<td>" + value['callsign'] + "</td>" +
-                "<td>" + value['status'] + "</td>" +
-                "<td>" + value['type'] + "</td>" +
-                "<td>" + new Date(new Date().getTime() - new Date(value['lastUpdated']).getTime()).getMinutes() + " mins</td>" +
-                "</tr>");
-        });
+        if(data != "Error"){
+            $.each(data, function(key, value){
+                $('.resourcesList tbody').append("<tr>" +
+                    "<td>" + value['callsign'] + "</td>" +
+                    "<td>" + value['status'] + "</td>" +
+                    "<td>" + value['type'] + "</td>" +
+                    "<td>" + new Date(new Date().getTime() - new Date(value['lastUpdated']).getTime()).getMinutes() + " mins</td>" +
+                    "</tr>");
+            });
+        }
     });
 
 }
