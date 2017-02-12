@@ -7,11 +7,11 @@ router.get('/', function (req, res, next) {
 });
 
 router.get('/dashboard', isAuthenticated, function(req, res, next) {
-    res.render('user/dashboard', { user : req.user });
+    res.render('user/dashboard', { user : req.user, page_name: 'dashboard' });
 });
 
 router.get('/command', isAuthenticated, function(req, res, next) {
-   res.render('user/command', { user: req.user });
+   res.render('user/command', { user: req.user, page_name: 'command' });
 });
 
 router.post('/', passport.authenticate('login', {

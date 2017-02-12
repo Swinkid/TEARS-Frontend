@@ -21,8 +21,8 @@
 							<%= user.firstname %> <%= user.lastname %>
 						</a>
 					</li>
-					<li><a href="/dashboard"><span class="glyphicon glyphicon-lock"></span> Dashboard</a></li>
-					<li><a href="/command"><span class="glyphicon glyphicon-lock"></span> Command & Control</a></li>
+					<li <% if (page_name === 'dashboard') { %>class="active" <% } %>><a href="/dashboard"><span class="glyphicon glyphicon-lock"></span> Dashboard</a></li>
+					<li <% if (page_name === 'command') { %>class="active" <% } %>><a href="/command"><span class="glyphicon glyphicon-lock"></span> Command & Control</a></li>
 					<li><a href="#"><span class="glyphicon glyphicon-envelope"></span> Messages <span class="badge pull-right">42</span></a></li>
 					<li><a href=""><span class="glyphicon glyphicon-cog"></span> Preferences</a></li>
 					<li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
