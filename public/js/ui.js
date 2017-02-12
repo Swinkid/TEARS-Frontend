@@ -12,7 +12,7 @@ function togglePanel(panelType){
         switch(panelType){
             case "resource":
                 $('.resource').removeClass("hidden");
-                refreshResourcesTable();
+                globalUpdate();
                 break;
             case "incident":
                 $('.incident').removeClass("hidden");
@@ -47,23 +47,25 @@ function fetchWarnings(){
 
 }
 
-function fetchIncidentDispatch(){
+function refreshResourcesTable(data){
+    $('.resourcesList tbody').empty();
+
+    if(data != "Error"){
+        $.each(data, function(key, value){
+            $('.resourcesList tbody').append("<tr>" +
+                "<td>" + value['callsign'] + "</td>" +
+                "<td>" + value['status'] + "</td>" +
+                "<td>" + value['type'] + "</td>" +
+                "<td>" + new Date(new Date().getTime() - new Date(value['lastUpdated']).getTime()).getMinutes() + " mins</td>" +
+                "</tr>");
+        });
+    }
 
 }
 
-function refreshResourcesTable(){
-    $('.resourcesList tbody').empty();
-    $.getJSON("/api/resources", function (data) {
-        if(data != "Error"){
-            $.each(data, function(key, value){
-                $('.resourcesList tbody').append("<tr>" +
-                    "<td>" + value['callsign'] + "</td>" +
-                    "<td>" + value['status'] + "</td>" +
-                    "<td>" + value['type'] + "</td>" +
-                    "<td>" + new Date(new Date().getTime() - new Date(value['lastUpdated']).getTime()).getMinutes() + " mins</td>" +
-                    "</tr>");
-            });
-        }
+function globalUpdate(){
+    $.getJSON("/api/resources", function (result) {
+        updateMarkers(result);
+        refreshResourcesTable(result);
     });
-
 }

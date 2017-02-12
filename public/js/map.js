@@ -1,5 +1,34 @@
 var map;
 
+var markers = [];
+
+function updateMarkers(data){
+    clearMarkers();
+
+    if(data != "Error"){
+        $.each(data, function(key, value){
+            if(value.status != "OFFLINE"){
+                var location = { lat : parseFloat(value.latestLatitude), lng : parseFloat(value.latestLongitude)};
+
+                var marker = new google.maps.Marker({
+                    position: location,
+                    map: map
+                });
+
+                markers.push(marker);
+            }
+        });
+    }
+
+}
+
+function clearMarkers(){
+    for(var i = 0; i < markers.length; i++){
+        markers[i].setMap(null);
+    }
+    markers = [];
+}
+
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
         zoom: 15,
