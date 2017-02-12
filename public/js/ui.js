@@ -52,11 +52,27 @@ function refreshResourcesTable(data){
 
     if(data != "Error"){
         $.each(data, function(key, value){
+            var timeDifference = new Date(new Date().getTime() - new Date(value['lastUpdated']).getTime());
+
+            var differenceString = "";
+
+            if (timeDifference.getHours() > 0){
+                differenceString += " " + timeDifference.getHours() + " hrs";
+            }
+
+            if(timeDifference.getMinutes() > 0){
+                differenceString += " " + timeDifference.getMinutes() + " min";
+            }
+
+            if(timeDifference.getSeconds() > 0 && timeDifference.getMinutes() < 1){
+                differenceString += " " + timeDifference.getSeconds() + " sec";
+            }
+
             $('.resourcesList tbody').append("<tr>" +
                 "<td>" + value['callsign'] + "</td>" +
                 "<td>" + value['status'] + "</td>" +
                 "<td>" + value['type'] + "</td>" +
-                "<td>" + new Date(new Date().getTime() - new Date(value['lastUpdated']).getTime()).getMinutes() + " mins</td>" +
+                "<td>" + differenceString + "</td>" +
                 "</tr>");
         });
     }
