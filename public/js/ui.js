@@ -5,18 +5,9 @@ var lastPanel = "";
 
 function togglePanel(panelType){
     if(propertiesOpen && lastPanel == panelType){
-        $(PROPERTIES_PANEL_CLASS).addClass("hidden");
-        $(CONTENT_CLASS).removeClass("col-sm-7");
-        $(CONTENT_CLASS).removeClass("col-md-6");
-        $(CONTENT_CLASS).addClass("col-sm-9");
-        $(CONTENT_CLASS).addClass("col-md-10");
-        google.maps.event.trigger(map, "resize");
+        togglePanelClosed();
     } else {
-        $(PROPERTIES_PANEL_CLASS).addClass("hidden");
-        $(CONTENT_CLASS).addClass("col-sm-7");
-        $(CONTENT_CLASS).addClass("col-md-6");
-        $(CONTENT_CLASS).removeClass("col-sm-9");
-        $(CONTENT_CLASS).removeClass("col-md-10");
+        togglePanelOpen();
 
         switch(panelType){
             case "resource":
@@ -31,6 +22,23 @@ function togglePanel(panelType){
     google.maps.event.trigger(map, "resize");
     propertiesOpen = !propertiesOpen;
     lastPanel = panelType;
+}
+
+function togglePanelOpen(){
+    $(PROPERTIES_PANEL_CLASS).addClass("hidden");
+    $(CONTENT_CLASS).addClass("col-sm-7");
+    $(CONTENT_CLASS).addClass("col-md-6");
+    $(CONTENT_CLASS).removeClass("col-sm-9");
+    $(CONTENT_CLASS).removeClass("col-md-10");
+}
+
+function togglePanelClosed() {
+    $(PROPERTIES_PANEL_CLASS).addClass("hidden");
+    $(CONTENT_CLASS).removeClass("col-sm-7");
+    $(CONTENT_CLASS).removeClass("col-md-6");
+    $(CONTENT_CLASS).addClass("col-sm-9");
+    $(CONTENT_CLASS).addClass("col-md-10");
+    google.maps.event.trigger(map, "resize");
 }
 
 function fetchWarnings(){
