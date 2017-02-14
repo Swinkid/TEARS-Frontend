@@ -25,7 +25,7 @@ router.get('/resources', isAuthenticated, function(req, res, next) {
                 parsedData['timeDifference'] = new Date(new Date().getTime() - new Date(parsedData['lastUpdated']).getTime());
             }
 
-            res.json();
+            res.json(parsedData);
         });
 
         req.on('error', function(e) {
