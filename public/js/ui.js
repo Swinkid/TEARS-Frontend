@@ -78,6 +78,8 @@ function refreshResourcesTable(data){
                 "<td>" + differenceString + "</td>" +
                 "</tr>");
         });
+    } else {
+        console.log("ERROR");
     }
 
 }
