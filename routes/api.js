@@ -21,10 +21,10 @@ router.get('/resources', isAuthenticated, function(req, res, next) {
             parsedData = JSON.parse(data);
 
             _.forEach(parsedData, function (d) {
-                if((d['lastUpdated'] *1000) > new Date().getMilliseconds()){
-                    d['lastUpdated'] = (d['lastUpdated'] * 1000) - new Date().getMilliseconds();
+                if((d['lastUpdated']) > new Date().Time()){
+                    d['lastUpdated'] = d['lastUpdated'] - new Date().getTime();
                 } else {
-                    d['lastUpdated'] = new Date().getMilliseconds() - (d['lastUpdated'] * 1000);
+                    d['lastUpdated'] = new Date().getTime() - (d['lastUpdated']);
                 }
             });
 
