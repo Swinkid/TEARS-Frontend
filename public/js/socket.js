@@ -1,4 +1,4 @@
-var socket = io('//frontend.alexnoble.co.uk', {secure: true});
+var socket = io('//frontend.alexnoble.co.uk');
 
 socket.on('update', function () {
     globalUpdate();
