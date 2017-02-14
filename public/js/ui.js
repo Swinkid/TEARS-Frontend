@@ -57,6 +57,8 @@ function refreshResourcesTable(data){
 
             var timeDifference = value['timeDifference'];
 
+            console.log("UPDATING");
+
             if (timeDifference.getHours() > 0){
                 differenceString += " " + timeDifference.getHours() + " hrs";
             }
