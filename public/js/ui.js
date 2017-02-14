@@ -53,17 +53,9 @@ function refreshResourcesTable(data){
     if(data != "Error"){
         $.each(data, function(key, value){
 
-            var timeDifference;
-
-            if(new Date(value['lastUpdated']).getTime() > new Date().getTime()){
-                timeDifference = new Date(new Date(value['lastUpdated']).getTime() - new Date().getTime());
-            } else {
-                timeDifference = new Date(new Date().getTime() - new Date(value['lastUpdated']).getTime());
-            }
-
-
-
             var differenceString = "";
+
+            var timeDifference = value['timeDifference'];
 
             if (timeDifference.getHours() > 0){
                 differenceString += " " + timeDifference.getHours() + " hrs";
