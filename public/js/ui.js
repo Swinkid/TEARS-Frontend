@@ -55,7 +55,7 @@ function refreshResourcesTable(data){
 
             var differenceString = "";
 
-            var timeDifference = value['timeDifference'];
+           /* var timeDifference = value['timeDifference'];
 
             console.log("UPDATING");
 
@@ -69,13 +69,13 @@ function refreshResourcesTable(data){
 
             if(timeDifference.getSeconds() > 0 && timeDifference.getMinutes() < 1){
                 differenceString += " " + timeDifference.getSeconds() + " sec";
-            }
+            }*/
 
             $('.resourcesList tbody').append("<tr>" +
                 "<td>" + value['callsign'] + "</td>" +
                 "<td>" + value['status'] + "</td>" +
                 "<td>" + value['type'] + "</td>" +
-                "<td>" + differenceString + "</td>" +
+                "<td>" + value['timeDifference'] + "</td>" +
                 "</tr>");
         });
     } else {
