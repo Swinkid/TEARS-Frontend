@@ -75,7 +75,7 @@ function refreshResourcesTable(data){
                 "<td>" + value['callsign'] + "</td>" +
                 "<td>" + value['status'] + "</td>" +
                 "<td>" + value['type'] + "</td>" +
-                "<td>" + value['timeDifference'] + "</td>" +
+                "<td>" + new Date(value['lastUpdated']) + "</td>" +
                 "</tr>");
         });
     } else {
