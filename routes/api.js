@@ -3,6 +3,7 @@ var passport = require('passport');
 var router = express.Router();
 var Config = require('../config');
 var http = require('http');
+var _ = require('loadash');
 
 router.get('/resources', isAuthenticated, function(req, res, next) {
     var requestOptions = {
@@ -19,13 +20,13 @@ router.get('/resources', isAuthenticated, function(req, res, next) {
 
             parsedData = JSON.parse(data);
 
-            if((parsedData['lastUpdated'] *1000) > new Date().getMilliseconds()){
-                parsedData['lastUpdated'] = (parsedData['lastUpdated'] * 1000) - new Date().getMilliseconds();
-            } else {
-                parsedData['lastUpdated'] = new Date().getMilliseconds() - (parsedData['lastUpdated'] * 1000);
-            }
-
-            console.log(parsedData['lastUpdated']);
+            _.forEach(parsedData, function (d) {
+                if((d['lastUpdated'] *1000) > new Date().getMilliseconds()){
+                    d['lastUpdated'] = (d['lastUpdated'] * 1000) - new Date().getMilliseconds();
+                } else {
+                    d['lastUpdated'] = new Date().getMilliseconds() - (d['lastUpdated'] * 1000);
+                }
+            });
 
             res.json(parsedData);
         });
