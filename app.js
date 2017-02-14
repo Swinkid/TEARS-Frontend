@@ -1,5 +1,6 @@
 var config = require('./config');
 var express = require('express');
+var redis   = require("redis");
 var path = require('path');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
@@ -9,6 +10,9 @@ var passport = require('passport');
 var mongoose = require('mongoose');
 var flash = require('connect-flash');
 var session = require('express-session');
+var redisStore = require('connect-redis')(session);
+
+var client  = redis.createClient();
 
 mongoose.connect(config.database);
 
@@ -29,8 +33,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
     secret: config.secret,
     resave: true,
-    saveUninitialized: true
+    saveUninitialized: true,
+    proxy: true,
+    cookie : { secure: true },
+    store: new redisStore({ host: 'localhost', port: 6379, client: client,ttl :  260})
 }));
+
+app.set('trust proxy', 1);
 
 app.use(passport.initialize());
 app.use(passport.session());
