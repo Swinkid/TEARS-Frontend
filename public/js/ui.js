@@ -55,27 +55,25 @@ function refreshResourcesTable(data){
 
             var differenceString = "";
 
-           /* var timeDifference = value['timeDifference'];
-
-            console.log("UPDATING");
+           var timeDifference = new Date(value['lastUpdated']);
 
             if (timeDifference.getHours() > 0){
                 differenceString += " " + timeDifference.getHours() + " hrs";
             }
 
-            if(timeDifference.getMinutes() > 0){
+            if(timeDifference.getMinutes() >= 1){
                 differenceString += " " + timeDifference.getMinutes() + " min";
             }
 
-            if(timeDifference.getSeconds() > 0 && timeDifference.getMinutes() < 1){
+            if(timeDifference.getSeconds() >= 0 && timeDifference.getMinutes() < 1){
                 differenceString += " " + timeDifference.getSeconds() + " sec";
-            }*/
+            }
 
             $('.resourcesList tbody').append("<tr>" +
                 "<td>" + value['callsign'] + "</td>" +
                 "<td>" + value['status'] + "</td>" +
                 "<td>" + value['type'] + "</td>" +
-                "<td>" + new Date(value['lastUpdated']) + "</td>" +
+                "<td>" + differenceString + "</td>" +
                 "</tr>");
         });
     } else {
