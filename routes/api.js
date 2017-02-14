@@ -3,7 +3,7 @@ var passport = require('passport');
 var router = express.Router();
 var Config = require('../config');
 var http = require('http');
-var _ = require('loadash');
+var _ = require('lodash');
 
 router.get('/resources', isAuthenticated, function(req, res, next) {
     var requestOptions = {
