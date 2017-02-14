@@ -21,11 +21,7 @@ router.get('/resources', isAuthenticated, function(req, res, next) {
             parsedData = JSON.parse(data);
 
             _.forEach(parsedData, function (d) {
-                if((d['lastUpdated']) > new Date().getTime()){
-                    d['lastUpdated'] = d['lastUpdated'] - new Date().getTime();
-                } else {
-                    d['lastUpdated'] = new Date().getTime() - (d['lastUpdated']);
-                }
+                d['lastUpdated'] = d['lastUpdated'] - new Date().getTime();
             });
 
             res.json(parsedData);
