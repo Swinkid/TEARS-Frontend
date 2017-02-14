@@ -20,9 +20,9 @@ router.get('/resources', isAuthenticated, function(req, res, next) {
             parsedData = JSON.parse(data);
 
             if(new Date(parsedData['lastUpdated']).getTime() > new Date().getTime()){
-                parsedData['timeDifference'] = new Date(new Date(value['lastUpdated']).getTime() - new Date().getTime());
+                parsedData['timeDifference'] = new Date(new Date(parsedData['lastUpdated']).getTime() - new Date().getTime());
             } else {
-                parsedData['timeDifference'] = new Date(new Date().getTime() - new Date(value['lastUpdated']).getTime());
+                parsedData['timeDifference'] = new Date(new Date().getTime() - new Date(parsedData['lastUpdated']).getTime());
             }
 
             res.json();
