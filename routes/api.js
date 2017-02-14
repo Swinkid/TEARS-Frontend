@@ -16,8 +16,12 @@ router.get('/resources', isAuthenticated, function(req, res, next) {
         result.on('data', function (data) {
             data = data.toString();
 
-            res.json(JSON.parse(data));
 
+            res.json(JSON.parse(data));
+        });
+
+        req.on('error', function(e) {
+            res.json("Error");
         });
     });
 
