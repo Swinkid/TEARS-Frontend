@@ -36,6 +36,7 @@ app.use(session({
     saveUninitialized: true,
     proxy: true,
     cookie : { secure: true },
+    //TODO: change below to mongostore
     store: new redisStore({ host: 'localhost', port: 6379, client: client,ttl :  260})
 }));
 
