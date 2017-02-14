@@ -86,6 +86,7 @@ function refreshResourcesTable(data){
 
 function globalUpdate(){
     $.getJSON("/api/resources", function (result) {
+        console.log("GETTING NEW VALS");
         updateMarkers(result);
         refreshResourcesTable(result);
     });
