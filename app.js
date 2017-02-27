@@ -10,9 +10,10 @@ var passport = require('passport');
 var mongoose = require('mongoose');
 var flash = require('connect-flash');
 var session = require('express-session');
-var redisStore = require('connect-redis')(session);
+//var redisStore = require('connect-redis')(session);
+var MongoStore = require('connect-mongo')(session);
 
-var client  = redis.createClient();
+//var client  = redis.createClient();
 
 mongoose.connect(config.database);
 
@@ -35,9 +36,12 @@ app.use(session({
     resave: true,
     saveUninitialized: true,
     proxy: true,
-    cookie : { secure: true },
+    //cookie : { secure: true },
     //TODO: change below to mongostore
-    store: new redisStore({ host: 'localhost', port: 6379, client: client,ttl :  260})
+    //store: new redisStore({ host: 'localhost', port: 6379, client: client,ttl :  260})
+    store: new MongoStore({
+        url: config.database
+    })
 }));
 
 app.set('trust proxy', 1);
