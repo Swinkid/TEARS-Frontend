@@ -77,14 +77,13 @@ function refreshResourcesTable(data){
                 "</tr>");
         });
     } else {
-        console.log("ERROR");
+
     }
 
 }
 
 function globalUpdate(){
     $.getJSON("/api/resources", function (result) {
-        console.log("GETTING NEW VALS");
         updateMarkers(result);
         refreshResourcesTable(result);
     });

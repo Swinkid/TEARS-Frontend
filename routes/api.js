@@ -5,6 +5,10 @@ var Config = require('../config');
 var http = require('http');
 var _ = require('lodash');
 
+router.get('/test', function(req, res, next){
+
+});
+
 router.get('/resources', isAuthenticated, function(req, res, next) {
     var requestOptions = {
         host : Config.backend,

@@ -1,19 +1,16 @@
 var config = require('./config');
 var express = require('express');
-var redis   = require("redis");
+
 var path = require('path');
-var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var socketio = require('socket.io');
 
 var passport = require('passport');
 var mongoose = require('mongoose');
 var flash = require('connect-flash');
 var session = require('express-session');
-//var redisStore = require('connect-redis')(session);
 var MongoStore = require('connect-mongo')(session);
-
-//var client  = redis.createClient();
 
 mongoose.connect(config.database);
 
@@ -22,10 +19,14 @@ var api = require('./routes/api');
 
 var app = express();
 
+var io = socketio();
+app.io = io;
+
+require('./sockets/socket')(io);
+
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -36,9 +37,8 @@ app.use(session({
     resave: true,
     saveUninitialized: true,
     proxy: true,
+    // TODO: Make below work on both dev and live environments
     //cookie : { secure: true },
-    //TODO: change below to mongostore
-    //store: new redisStore({ host: 'localhost', port: 6379, client: client,ttl :  260})
     store: new MongoStore({
         url: config.database
     })
@@ -55,19 +55,15 @@ require('./auth/local')(passport);
 app.use('/', index);
 app.use('/api', api);
 
+app.get('/call', function (req, res, next) {
+    io.emit('notification', 'testing');
+    res.send(JSON.stringify("Done"))
+});
 
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
-});
-
-app.use(function(err, req, res, next) {
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  res.status(err.status || 500);
-  res.render('error');
 });
 
 module.exports = app;
