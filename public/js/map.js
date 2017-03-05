@@ -22,6 +22,12 @@ function updateMarkers(data){
 
 }
 
+function moveMapCenter(lat, lng){
+    var point = new google.maps.LatLng(lat, lng);
+
+    map.panTo(point)
+}
+
 function clearMarkers(){
     for(var i = 0; i < markers.length; i++){
         markers[i].setMap(null);

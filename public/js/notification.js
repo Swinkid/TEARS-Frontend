@@ -28,6 +28,8 @@ function generateNotification(data){
 
     notification.onclick = function () {
         //TODO: MOVE MAP, START NEW INCIDENT
+        togglePanel("incident");
         notification.close();
+
     }
 }
