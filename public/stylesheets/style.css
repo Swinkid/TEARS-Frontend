@@ -12,12 +12,16 @@
     display: none;
 }
 
-.form-horizontal {
+#incidentDetails, #incidentWarnings, #incidentDispatch {
     padding: 10px;
     border-left: 1px solid #ddd;
     border-right: 1px solid #ddd;
     border-bottom: 1px solid #ddd;
     background: #fff;
+}
+
+#incidentDetails.h2, #incidentWarnings.h2, #incidentDispatch.h2{
+    margin-top: 0;
 }
 
 @media (min-width: 768px) {
