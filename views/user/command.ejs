@@ -100,10 +100,64 @@
 						</form>
 					</div>
 					<div id="incidentWarnings" class="tab-pane disabled">
-						<p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+						<h2>Warning Markers</h2>
+						<table class="table table-striped resourcesList">
+							<thead>
+							<tr>
+								<th>Call Sign</th>
+								<th>Status</th>
+								<th>Type</th>
+								<th>Last Update</th>
+								<th></th>
+							</tr>
+							</thead>
+							<tbody>
+
+							</tbody>
+						</table>
+						<h2>New Warning Marker</h2>
+						<form class="form-horizontal">
+							<fieldset>
+
+								<!-- Select Basic -->
+								<div class="form-group">
+									<label class="col-md-2 control-label" for="iwarningtype">Warning Type</label>
+									<div class="col-md-10">
+										<select id="iwarningtype" name="iwarningtype" class="form-control">
+											<option value="Violent">Violent</option>
+											<option value="Weapons">Weapons</option>
+											<option value="Entry Code">Entry Code</option>
+											<option value="General">General</option>
+										</select>
+									</div>
+								</div>
+
+								<!-- Textarea -->
+								<div class="form-group">
+									<label class="col-md-2 control-label" for="warningmarkerdetails">Marker Details</label>
+									<div class="col-md-10">
+										<textarea class="form-control" id="warningmarkerdetails" name="warningmarkerdetails"></textarea>
+									</div>
+								</div>
+
+							</fieldset>
+						</form>
 					</div>
 					<div id="incidentDispatch"  class="tab-pane disabled">
-						<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+						<table class="table table-striped resourcesList">
+							<thead>
+							<tr>
+								<th>Call Sign</th>
+								<th>Status</th>
+								<th>Type</th>
+								<th>Last Update</th>
+								<th></th>
+							</tr>
+							</thead>
+							<tbody>
+
+							</tbody>
+						</table>
 					</div>
 				</div>
 			</div>
