@@ -12,6 +12,10 @@
     display: none;
 }
 
+.form-horizontal {
+    margin-top: 10px;
+}
+
 @media (min-width: 768px) {
     .content .container {
         width: 700px;
