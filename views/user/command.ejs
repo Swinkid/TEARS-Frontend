@@ -101,14 +101,12 @@
 					</div>
 					<div id="incidentWarnings" class="tab-pane disabled">
 						<h2>Warning Markers</h2>
-						<table class="table table-striped resourcesList">
+						<table class="table table-striped">
 							<thead>
 							<tr>
-								<th>Call Sign</th>
-								<th>Status</th>
 								<th>Type</th>
-								<th>Last Update</th>
-								<th></th>
+								<th>Details</th>
+								<th>Edit</th>
 							</tr>
 							</thead>
 							<tbody>
@@ -140,18 +138,26 @@
 									</div>
 								</div>
 
+								<!-- Button (Double) -->
+								<div class="form-group">
+									<label class="col-md-2 control-label" for="Save"></label>
+									<div class="col-md-10">
+										<button id="Save" name="Save" class="btn btn-success">Save</button>
+										<button id="Reset" name="Reset" class="btn btn-danger">Reset</button>
+									</div>
+								</div>
+
 							</fieldset>
 						</form>
 					</div>
 					<div id="incidentDispatch"  class="tab-pane disabled">
-						<table class="table table-striped resourcesList">
+						<table class="table table-striped">
 							<thead>
 							<tr>
 								<th>Call Sign</th>
-								<th>Status</th>
 								<th>Type</th>
 								<th>Last Update</th>
-								<th></th>
+								<th>Distance</th>
 							</tr>
 							</thead>
 							<tbody>
