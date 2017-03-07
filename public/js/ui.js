@@ -32,8 +32,17 @@ function togglePanelOpen(){
     $(CONTENT_CLASS).removeClass("col-sm-9");
     $(CONTENT_CLASS).removeClass("col-md-10");
 
+    resetIncidentForm();
+    resetIncidentForm();
+}
+
+function resetWarningMarkerForm(){
     $("#warningmarkersform").trigger("reset");
+}
+
+function resetIncidentForm(){
     $("#newincidentform").trigger("reset");
+
 }
 
 function togglePanelClosed() {
@@ -46,8 +55,23 @@ function togglePanelClosed() {
 }
 
 function fetchWarnings(){
-    $("#incidentWarnings").empty();
+    //TODO
+}
 
+function saveWarningMaker(){
+    //TODO
+}
+
+function saveNewIncident(){
+    //TODO
+}
+
+function dispatchTab(){
+    //TODO
+}
+
+function calcTravelTime(locationX, locationY){
+    //TODO
 }
 
 function refreshResourcesTable(data){
@@ -56,7 +80,7 @@ function refreshResourcesTable(data){
     if(data != "Error"){
         $.each(data, function(key, value){
 
-            var differenceString = "";
+           var differenceString = "";
 
            var timeDifference = new Date(value['lastUpdated']);
 
