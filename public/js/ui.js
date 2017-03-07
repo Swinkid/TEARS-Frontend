@@ -32,8 +32,8 @@ function togglePanelOpen(){
     $(CONTENT_CLASS).removeClass("col-sm-9");
     $(CONTENT_CLASS).removeClass("col-md-10");
 
-    $("#warningmarkersform").reset();
-    $("#newincidentform").reset();
+    $("#warningmarkersform").trigger("reset");
+    $("#newincidentform").trigger("reset");
 }
 
 function togglePanelClosed() {
