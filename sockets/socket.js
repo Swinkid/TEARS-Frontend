@@ -1,4 +1,4 @@
-module.exports = function (io){
+module.exports = function (io) {
     var intervalTime = 1000;
 
     setInterval(function () {

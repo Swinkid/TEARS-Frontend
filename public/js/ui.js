@@ -1,7 +1,7 @@
-var CONTENT_CLASS = ".content";
-var PROPERTIES_PANEL_CLASS = ".properties-bar";
+var CONTENT_CLASS = '.content';
+var PROPERTIES_PANEL_CLASS = '.properties-bar';
 var propertiesOpen = false;
-var lastPanel = "";
+var lastPanel = '';
 
 function togglePanel(panelType){
     if(propertiesOpen && lastPanel == panelType){
