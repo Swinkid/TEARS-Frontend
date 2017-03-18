@@ -64,6 +64,32 @@ router.post('/incident/new', isAuthenticated, function (req, res, next) {
     });
 });
 
+router.post('/warning/new', isAuthenticated, function (req, res, next) {
+    var formData = {
+        location: req.body.location,
+        type: req.body.type,
+        details: req.body.details
+    };
+
+    request.post({url: 'http://localhost:3001/api/warning/new', form: formData}, function (err, httpResponse, body) {
+        if(!err){
+           res.json(body);
+        }
+    });
+});
+
+router.post('/warning/get', isAuthenticated, function (req, res, next) {
+    var formData = {
+        location: req.body.location
+    };
+
+    request.post({url: 'http://localhost:3001/api/warning', form: formData}, function (err, httpResponse, body) {
+        if(!err){
+            res.json(body);
+        }
+    });
+});
+
 module.exports = router;
 
 function isAuthenticated(req, res, next) {

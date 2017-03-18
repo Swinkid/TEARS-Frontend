@@ -75,11 +75,50 @@ function togglePanelClosed() {
 }
 
 function fetchWarnings(){
-    //TODO
+    if($("#ilocation").val() != ''){
+        var postData = {
+            location: $("#ilocation").val()
+        };
+
+        $.post("/api/warning/get", postData).done(function (data) {
+            $('#warningmarkerbody').empty();
+
+            var d = JSON.parse(data);
+
+            $.each(d, function(key, value){
+                $('#warningmarkerbody').append("<tr>" +
+                    "<td>" + value['type'] + "</td>" +
+                    "<td>" + value['details'] + "</td>" +
+                    "<td>" + "" + "</td>" +
+                    "</tr>");
+            });
+
+
+        });
+
+    }
 }
 
 function saveWarningMaker(){
-    //TODO
+    if($("#warningmarkerdetails").val() != ''){
+        var postData = {
+            location : $("#ilocation").val(),
+            type : $('#iwarningtype').val(),
+            details : $('#warningmarkerdetails').val()
+        };
+
+        $.post("/api/warning/new", postData).done(function (data) {
+            $('#warningmarkerbody').append("<tr>" +
+                "<td>" + $('#iwarningtype').val() + "</td>" +
+                "<td>" + $('#warningmarkerdetails').val() + "</td>" +
+                "<td></td>" +
+                "</tr>");
+
+            console.log(data);
+        });
+    } else {
+        alert('Fields have been left empty.')
+    }
 }
 
 function saveNewIncident(){
@@ -94,9 +133,10 @@ function saveNewIncident(){
         };
 
         $.post("/api/incident/new", postData).done(function (data) {
-            console.log(data);
+
         });
 
+        fetchWarnings();
         $('#incidentTabs a[href="#incidentWarnings"]').tab('show');
         $('#incidentTabs').find('*').removeClass('disabled');
         $('#IncidentSave').addClass('disabled');
