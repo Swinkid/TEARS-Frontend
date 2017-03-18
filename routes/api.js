@@ -49,7 +49,7 @@ router.post('/incident/new', isAuthenticated, function (req, res, next) {
         location: req.body.location,
         type : req.body.type,
         status: req.body.status,
-        priority : req.body.status,
+        priority : req.body.priority,
         details : req.body.details
     };
 

@@ -15,9 +15,9 @@
 		</div>
 		<div class="row">
 			<div class="col-md-12">
-				<ul class="nav nav-tabs">
-					<li class="active"><a data-toggle="tab" href="#incidentDetails" onclick="test()">Incident Details</a></li>
-					<li class="disabled"><a data-toggle="tab" href="#incidentWarnings">Warnings</a></li>
+				<ul id="incidentTabs" class="nav nav-tabs">
+					<li class="active"><a data-toggle="tab" href="#incidentDetails">Incident Details</a></li>
+					<li class="disabled"><a data-toggle="tab" href="#incidentWarnings" onclick="fetchWarnings()">Warnings</a></li>
 					<li class="disabled"><a data-toggle="tab" href="#incidentDispatch" onclick="fetchIncidentDispatch()">Dispatch</a></li>
 				</ul>
 
@@ -70,7 +70,7 @@
 								<div class="form-group">
 									<label class="col-md-2 control-label" for="selectbasic">Priority</label>
 									<div class="col-md-10">
-										<select id="selectbasic" name="selectbasic" class="form-control">
+										<select id="ipriority" name="selectbasic" class="form-control">
 											<option value="Critical">Critical</option>
 											<option value="High">High</option>
 											<option value="Medium">Medium</option>
@@ -91,8 +91,9 @@
 								<div class="form-group">
 									<label class="col-md-2 control-label" for="Save"></label>
 									<div class="col-md-10">
-										<button id="Save" name="Save" class="btn btn-success" onclick="saveNewIncident()">Save</button>
-										<button id="Reset" name="Reset" class="btn btn-danger" onclick="resetIncidentForm()">Reset</button>
+										<button id="IncidentSave" name="Save" class="btn btn-success" onclick="saveNewIncident()">Save</button>
+										<button id="IncidentReset" name="Reset" class="btn btn-danger" onclick="resetIncidentForm()">Reset</button>
+										<button id="resetAll" name="RestAll" class="btn btn-danger" onclick="resetAllIncident()">Reset All</button>
 									</div>
 								</div>
 
@@ -144,6 +145,7 @@
 									<div class="col-md-10">
 										<button id="Save" name="Save" class="btn btn-success">Save</button>
 										<button id="Reset" name="Reset" class="btn btn-danger" onclick="resetWarningMarkerForm()">Reset</button>
+										<button id="resetAll" name="RestAll" class="btn btn-danger" onclick="resetAllIncident()">Reset All</button>
 									</div>
 								</div>
 

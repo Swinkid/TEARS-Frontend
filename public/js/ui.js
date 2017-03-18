@@ -8,6 +8,10 @@ $(document).ready(function () {
     $("#newincidentform").submit(function(e){
         e.preventDefault();
     });
+
+    $("#warningmarkersform").submit(function(e){
+        e.preventDefault();
+    });
 });
 
 
@@ -50,7 +54,15 @@ function resetWarningMarkerForm(){
 
 function resetIncidentForm(){
     $("#newincidentform").trigger("reset");
+}
 
+function resetAllIncident() {
+    resetIncidentForm();
+    resetWarningMarkerForm();
+    $('#incidentTabs a[href="#incidentDetails"]').tab('show');
+    $('#incidentTabs').find('*').addClass('disabled');
+    $('#IncidentSave').removeClass('disabled');
+    $('#IncidentReset').removeClass('disabled');
 }
 
 function togglePanelClosed() {
@@ -84,6 +96,11 @@ function saveNewIncident(){
         $.post("/api/incident/new", postData).done(function (data) {
             console.log(data);
         });
+
+        $('#incidentTabs a[href="#incidentWarnings"]').tab('show');
+        $('#incidentTabs').find('*').removeClass('disabled');
+        $('#IncidentSave').addClass('disabled');
+        $('#IncidentReset').addClass('disabled');
     } else {
         alert('You\'ve left some fields empty.');
     }
