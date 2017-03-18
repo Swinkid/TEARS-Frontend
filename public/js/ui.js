@@ -3,6 +3,14 @@ var PROPERTIES_PANEL_CLASS = '.properties-bar';
 var propertiesOpen = false;
 var lastPanel = '';
 
+
+$(document).ready(function () {
+    $("#newincidentform").submit(function(e){
+        e.preventDefault();
+    });
+});
+
+
 function togglePanel(panelType){
     if(propertiesOpen && lastPanel == panelType){
         togglePanelClosed();
@@ -63,7 +71,22 @@ function saveWarningMaker(){
 }
 
 function saveNewIncident(){
-    //TODO
+
+    if($("#ilocation").val() != '' && $("#idetails").val() != ''){
+        var postData = {
+            location : $("#ilocation").val(),
+            type : $("#itype").val(),
+            status : $("#istatus").val(),
+            priority : $("#ipriority").val(),
+            details : $("#idetails").val()
+        };
+
+        $.post("/api/incident/new", postData).done(function (data) {
+            console.log(data);
+        });
+    } else {
+        alert('You\'ve left some fields empty.');
+    }
 }
 
 function dispatchTab(){

@@ -3,6 +3,7 @@ var passport = require('passport');
 var router = express.Router();
 var Config = require('../config');
 var http = require('http');
+var request = require('request');
 var _ = require('lodash');
 
 router.get('/test', function(req, res, next){
@@ -40,6 +41,26 @@ router.get('/resources', isAuthenticated, function(req, res, next) {
 
     requestResources.on('error', function(e) {
         res.json("Error");
+    });
+});
+
+router.post('/incident/new', isAuthenticated, function (req, res, next) {
+    var formData = {
+        location: req.body.location,
+        type : req.body.type,
+        status: req.body.status,
+        priority : req.body.status,
+        details : req.body.details
+    };
+
+    request.post({url: 'http://localhost:3001/api/incident/add', form: formData}, function (err, httpResponse, body) {
+       if(!err){
+           var returnData = {
+               id : body.replace(/['"]+/g, '')
+           };
+
+           res.json(returnData);
+       }
     });
 });
 

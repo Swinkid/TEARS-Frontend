@@ -22,11 +22,13 @@ router.get('/command', isAuthenticated, function(req, res, next) {
 router.get('/users', isAuthenticated, function(req, res, next) {
 
     request(backendURL + '/api/users/list', function (error, response, body) {
+        var users = JSON.parse(body);
+
         if(error || response.statusCode !== 200){
-            return res.sendStatus(500);
+            users = "";
         }
 
-        res.render('user/users', { user: req.user, page_name: 'users', users: JSON.parse(body)});
+        res.render('user/users', { user: req.user, page_name: 'users', users: users });
 
     });
 });
@@ -34,11 +36,13 @@ router.get('/users', isAuthenticated, function(req, res, next) {
 router.get('/resources', isAuthenticated, function(req, res, next) {
 
     request(backendURL + '/frontend/resource', function (error, response, body) {
+        var resources = JSON.parse(body);
+
         if(error || response.statusCode !== 200){
-            return res.sendStatus(500);
+            resources = "";
         }
 
-        res.render('user/resources', { user: req.user, page_name: 'resources', resources: JSON.parse(body)});
+        res.render('user/resources', { user: req.user, page_name: 'resources', resources: resources});
     });
 });
 
