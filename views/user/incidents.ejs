@@ -1,0 +1,31 @@
+<% include ../partials/header.ejs %>
+<div clas="row">
+
+	<% include ../partials/navigation.ejs %>
+
+	<div class="col-sm-9 col-md-10 content">
+		<h1>Incidents</h1>
+		<table class="table table-striped">
+			<thead>
+			<tr>
+				<th>Type</th>
+				<th>Status</th>
+				<th>Location</th>
+				<th>Date</th>
+				<th>Priority</th>
+			</tr>
+			<% for(var i=0; i < incidents.length; i++) { %>
+			<tr>
+				<td><%= incidents[i].type %></td>
+				<td><%= incidents[i].status %></td>
+				<td><%= incidents[i].location %></td>
+				<td></td>
+				<td><%= incidents[i].priority %></td>
+			</tr>
+			<%}%>
+			</thead>
+		</table>
+	</div>
+</div>
+
+<% include ../partials/footer.ejs %>

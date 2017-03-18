@@ -22,13 +22,17 @@ router.get('/command', isAuthenticated, function(req, res, next) {
 router.get('/users', isAuthenticated, function(req, res, next) {
 
     request(backendURL + '/api/users/list', function (error, response, body) {
-        var users = JSON.parse(body);
+        var users = '';
 
-        if(error || response.statusCode !== 200){
+        if(!(body == null)) {
+            users = JSON.parse(body);
+        }
+
+        if (error || response.statusCode !== 200) {
             users = "";
         }
 
-        res.render('user/users', { user: req.user, page_name: 'users', users: users });
+        res.render('user/users', {user: req.user, page_name: 'users', users: users});
 
     });
 });
@@ -36,13 +40,36 @@ router.get('/users', isAuthenticated, function(req, res, next) {
 router.get('/resources', isAuthenticated, function(req, res, next) {
 
     request(backendURL + '/frontend/resource', function (error, response, body) {
-        var resources = JSON.parse(body);
+        var resources = '';
+
+        if(!(body == null)) {
+            resources = JSON.parse(body);
+        }
 
         if(error || response.statusCode !== 200){
             resources = "";
         }
 
         res.render('user/resources', { user: req.user, page_name: 'resources', resources: resources});
+    });
+});
+
+router.get('/incidents', isAuthenticated, function(req, res, next) {
+
+    request(backendURL + '/api/incident/all', function (error, response, body) {
+            var incidents = '';
+
+            if(!(body == null)) {
+                incidents = JSON.parse(body);
+            }
+
+            if (error || response.statusCode !== 200) {
+                incidents = "";
+            }
+
+            res.render('user/incidents', {user: req.user, page_name: 'incidents', incidents: incidents});
+
+            console.log(incidents);
     });
 });
 
