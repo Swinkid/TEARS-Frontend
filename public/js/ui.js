@@ -159,22 +159,6 @@ function dispatchTab(){
 
             $.each(data, function(index, value){
 
-                var differenceString = "";
-
-                var timeDifference = new Date(value['lastUpdated']);
-
-                if (timeDifference.getHours() > 0){
-                    differenceString += " " + timeDifference.getHours() + " hrs";
-                }
-
-                if(timeDifference.getMinutes() >= 1){
-                    differenceString += " " + timeDifference.getMinutes() + " min";
-                }
-
-                if(timeDifference.getSeconds() >= 0 && timeDifference.getMinutes() < 1){
-                    differenceString += " " + timeDifference.getSeconds() + " sec";
-                }
-
                 $.ajax({
                     contentType: "application/json",
                     data: { start : $('#ilocation').val(), end : value['latestLatitude'] + "," + value['latestLongitude'] },
@@ -187,7 +171,6 @@ function dispatchTab(){
                         "<td>" + value['callsign'] + "</td>" +
                         "<td>" + value['type'] + "</td>" +
                         "<td>" + value['status'] + "</td>" +
-                        "<td>" + differenceString + "</td>" +
                         "<td>" + $.parseJSON(data).rows[0].elements[0].duration.text + "</td>" +
                         "<td></td>" +
                         "</tr>");
@@ -197,20 +180,7 @@ function dispatchTab(){
             });
 
         });
-
-        // GET OFFICERS FOR TYPE
-        // FOR EACH RESOURCE GET TRAVEL TIME
-        // ADD TO TABLE
-
     }
-}
-
-function calcTravelTime(locationX, locationY){
-    var returnData = "";
-
-
-
-    return returnData;
 }
 
 function refreshResourcesTable(data){
@@ -249,7 +219,6 @@ function refreshResourcesTable(data){
 }
 
 function globalUpdate(){
-    dispatchTab();
     $.getJSON("/api/resources", function (result) {
         updateMarkers(result);
         refreshResourcesTable(result);
