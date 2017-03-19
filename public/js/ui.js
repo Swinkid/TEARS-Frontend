@@ -250,8 +250,8 @@ function refreshResourcesTable(data){
 
 function globalUpdate(){
     dispatchTab();
-    /*$.getJSON("/api/resources", function (result) {
+    $.getJSON("/api/resources", function (result) {
         updateMarkers(result);
         refreshResourcesTable(result);
-    });*/
+    });
 }
