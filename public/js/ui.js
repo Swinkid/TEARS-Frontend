@@ -154,7 +154,7 @@ function dispatchTab(){
             contentType: "application/json",
             data: { status : "ONLINE" },
             method: "get",
-            url: "//alexnoble.co.uk/api/resources"
+            url: "/api/resources"
         }).done(function (data) {
 
             $.each(data, function(index, value){
@@ -179,7 +179,7 @@ function dispatchTab(){
                     contentType: "application/json",
                     data: { start : $('#ilocation').val(), end : value['latestLatitude'] + "," + value['latestLongitude'] },
                     method: "get",
-                    url: "//frontend.alexnoble.co.uk/api/incident/travel"
+                    url: "/api/incident/travel"
                 }).done(function (data) {
 
 
