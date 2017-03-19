@@ -88,11 +88,14 @@ router.get('/incident/travel', isAuthenticated, function (req, res, next) {
 
 router.post('/incident/dispatch', isAuthenticated, function (req, res, next) {
     var formData = {
-
+        incidentId: req.body.incidentId,
+        device: req.body.device
     };
 
-    request.post({url: 'http://localhost:3001/api/', form: formData}, function () {
-
+    request.post({url: 'http://localhost:3001/api/updates/add', form: formData}, function (err, httpResponse, body) {
+        if(!err){
+            res.json(body);
+        }
     });
 });
 

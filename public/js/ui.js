@@ -216,7 +216,13 @@ function refreshResourcesTable(data){
 }
 
 function dispatch(incident, resource) {
-
+    $.ajax({
+        data: { device: resource,  incidentId : incident},
+        method: "post",
+        url: "/api/incident/dispatch"
+    }).done(function (data) {
+        // TODO OK
+    });
 }
 
 function globalUpdate(){
