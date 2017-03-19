@@ -92,10 +92,7 @@ function fetchWarnings(){
                     "<td>" + "" + "</td>" +
                     "</tr>");
             });
-
-
         });
-
     }
 }
 
@@ -131,7 +128,7 @@ function saveNewIncident(){
         };
 
         $.post("/api/incident/new", postData).done(function (data) {
-
+            $('#iid').val(data.id);
         });
 
         fetchWarnings();
@@ -166,13 +163,14 @@ function dispatchTab(){
                     url: "/api/incident/travel"
                 }).done(function (data) {
 
+                    var id = value['device'];
 
                     $('#dispatchBody').append("<tr>" +
                         "<td>" + value['callsign'] + "</td>" +
                         "<td>" + value['type'] + "</td>" +
                         "<td>" + value['status'] + "</td>" +
                         "<td>" + $.parseJSON(data).rows[0].elements[0].duration.text + "</td>" +
-                        "<td></td>" +
+                        '<td><button id="Dispatch" name="Dispatch" class="btn btn-danger" onclick="dispatch(\'' + $("#iid").val() + '\',\''+ id +'\')">Dispatch</button></td>' +
                         "</tr>");
 
                 });
@@ -215,6 +213,9 @@ function refreshResourcesTable(data){
     } else {
 
     }
+}
+
+function dispatch(incident, resource) {
 
 }
 

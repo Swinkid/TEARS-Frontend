@@ -68,8 +68,6 @@ router.get('/incidents', isAuthenticated, function(req, res, next) {
             }
 
             res.render('user/incidents', {user: req.user, page_name: 'incidents', incidents: incidents});
-
-            console.log(incidents);
     });
 });
 

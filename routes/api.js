@@ -14,13 +14,6 @@ router.get('/test', function(req, res, next){
 });
 
 router.get('/resources', function(req, res, next) {
-
-    var requestOptions = {
-
-    };
-
-    console.log(req.query);
-
     request({url: "http://localhost:3001/frontend/resource", qs : req.query, json: true}, function (err, response, body) {
             _.forEach(body, function (d) {
                 d['lastUpdated'] = new Date().getTime() - d['lastUpdated'];
@@ -64,6 +57,7 @@ router.post('/warning/new', isAuthenticated, function (req, res, next) {
     });
 });
 
+//TODO MAKE GET
 router.post('/warning/get', isAuthenticated, function (req, res, next) {
     var formData = {
         location: req.body.location
@@ -90,6 +84,16 @@ router.get('/incident/travel', isAuthenticated, function (req, res, next) {
         res.json(body);
     });
 
+});
+
+router.post('/incident/dispatch', isAuthenticated, function (req, res, next) {
+    var formData = {
+
+    };
+
+    request.post({url: 'http://localhost:3001/api/', form: formData}, function () {
+
+    });
 });
 
 module.exports = router;
