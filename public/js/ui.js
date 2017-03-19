@@ -154,7 +154,7 @@ function dispatchTab(){
             contentType: "application/json",
             data: { status : "ONLINE" },
             method: "get",
-            url: "http://localhost:3000/api/resources"
+            url: "//alexnoble.co.uk/api/resources"
         }).done(function (data) {
 
             $.each(data, function(index, value){
