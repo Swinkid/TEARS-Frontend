@@ -13,37 +13,20 @@ router.get('/test', function(req, res, next){
 
 });
 
-router.get('/resources', isAuthenticated, function(req, res, next) {
+router.get('/resources', function(req, res, next) {
+
     var requestOptions = {
-        host : Config.backend,
-        port : Config.backendPort,
-        path : '/frontend/resource',
-        method : 'GET'
+
     };
 
-    var requestResources = http.request(requestOptions, function(result){
-        result.on('data', function (data) {
-            data = data.toString();
+    console.log(req.query);
 
-
-            parsedData = JSON.parse(data);
-
-            _.forEach(parsedData, function (d) {
+    request({url: "http://localhost:3001/frontend/resource", qs : req.query, json: true}, function (err, response, body) {
+            _.forEach(body, function (d) {
                 d['lastUpdated'] = new Date().getTime() - d['lastUpdated'];
             });
 
-            res.json(parsedData);
-        });
-
-        req.on('error', function(e) {
-            res.json("Error");
-        });
-    });
-
-    requestResources.end();
-
-    requestResources.on('error', function(e) {
-        res.json("Error");
+            res.json(body);
     });
 });
 
@@ -93,10 +76,18 @@ router.post('/warning/get', isAuthenticated, function (req, res, next) {
     });
 });
 
-router.post('/incident/travel', isAuthenticated, function (req, res, next) {
+router.get('/incident/travel', isAuthenticated, function (req, res, next) {
 
-    request(GOOGLE_DISTANCE_MATIRIX_URL + GOOGLE_DISTANCE_MATRIX_KEY, function (err, httpResponse, body) {
+    var start = req.query.start;
+    var end = req.query.end;
 
+    start = start.replace(/\s/g, "+");
+
+    var URL = GOOGLE_DISTANCE_MATIRIX_URL + '&origins=' + start + '&destinations=' + end + GOOGLE_DISTANCE_MATRIX_KEY;
+
+
+    request(URL, function (err, httpResponse, body) {
+        res.json(body);
     });
 
 });

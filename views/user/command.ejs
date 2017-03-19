@@ -18,7 +18,7 @@
 				<ul id="incidentTabs" class="nav nav-tabs">
 					<li class="active"><a data-toggle="tab" href="#incidentDetails">Incident Details</a></li>
 					<li class="disabled"><a data-toggle="tab" href="#incidentWarnings" onclick="fetchWarnings()">Warnings</a></li>
-					<li class="disabled"><a data-toggle="tab" href="#incidentDispatch" onclick="fetchIncidentDispatch()">Dispatch</a></li>
+					<li class="disabled"><a data-toggle="tab" href="#incidentDispatch" onclick="dispatchTab()">Dispatch</a></li>
 				</ul>
 
 				<div class="tab-content">
@@ -158,11 +158,13 @@
 							<tr>
 								<th>Call Sign</th>
 								<th>Type</th>
+								<th>Status</th>
 								<th>Last Update</th>
 								<th>Distance</th>
+								<th>Dispatch</th>
 							</tr>
 							</thead>
-							<tbody>
+							<tbody id="dispatchBody">
 
 							</tbody>
 						</table>
