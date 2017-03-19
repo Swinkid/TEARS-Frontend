@@ -179,7 +179,7 @@ function dispatchTab(){
                     contentType: "application/json",
                     data: { start : $('#ilocation').val(), end : value['latestLatitude'] + "," + value['latestLongitude'] },
                     method: "get",
-                    url: "http://localhost:3000/api/incident/travel"
+                    url: "//frontend.alexnoble.co.uk/api/incident/travel"
                 }).done(function (data) {
 
 
