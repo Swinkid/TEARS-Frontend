@@ -6,6 +6,9 @@ var http = require('http');
 var request = require('request');
 var _ = require('lodash');
 
+var GOOGLE_DISTANCE_MATRIX_KEY = "&key=AIzaSyATLPcyfRfm_eCIlPIHojG5jHmXcEGfGQE";
+var GOOGLE_DISTANCE_MATIRIX_URL = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial";
+
 router.get('/test', function(req, res, next){
 
 });
@@ -88,6 +91,14 @@ router.post('/warning/get', isAuthenticated, function (req, res, next) {
             res.json(body);
         }
     });
+});
+
+router.post('/incident/travel', isAuthenticated, function (req, res, next) {
+
+    request(GOOGLE_DISTANCE_MATIRIX_URL + GOOGLE_DISTANCE_MATRIX_KEY, function (err, httpResponse, body) {
+
+    });
+
 });
 
 module.exports = router;
