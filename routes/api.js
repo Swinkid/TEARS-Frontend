@@ -99,6 +99,22 @@ router.post('/incident/dispatch', isAuthenticated, function (req, res, next) {
     });
 });
 
+router.get('/incidents', function (req, res, next) {
+    request({
+        url: 'http://localhost:3001/api/incident/all',
+        qs : req.query,
+        json: true
+    }, function (error, response, body) {
+        var incidents = '';
+
+        if(body){
+            incidents = body;
+        }
+
+        res.json(incidents);
+    });
+});
+
 module.exports = router;
 
 function isAuthenticated(req, res, next) {

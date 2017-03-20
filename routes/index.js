@@ -59,16 +59,15 @@ router.get('/resources', isAuthenticated, function(req, res, next) {
 });
 
 router.get('/incidents', isAuthenticated, function(req, res, next) {
-
-    request(backendURL + '/api/incident/all', function (error, response, body) {
+    request({
+        url: backendURL + '/api/incident/all',
+        qs : req.query,
+        json: true
+    }, function (error, response, body) {
             var incidents = '';
 
-            if(!(body == null)) {
-                incidents = JSON.parse(body);
-            }
-
-            if (error || response.statusCode !== 200) {
-                incidents = "";
+            if(body){
+                incidents = body;
             }
 
             res.render('user/incidents', {user: req.user, page_name: 'incidents', incidents: incidents});

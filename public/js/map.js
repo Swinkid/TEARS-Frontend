@@ -1,6 +1,9 @@
-var map;
+var map, map2, heatmap;
 
 var markers = [];
+
+
+var heatmap;
 
 function updateMarkers(data){
     clearMarkers();
@@ -90,5 +93,59 @@ function resourceControl(controlDiv, map, buttonText, buttonDescription, panelTy
 
     controlUI.addEventListener('click', function() {
         togglePanel(panelType);
+    });
+}
+
+function initHeatMap(){
+    map2 = new google.maps.Map(document.getElementById('map'), {
+        zoom: 15,
+        mapTypeControl: true,
+        mapTypeId: 'satellite',
+        mapTypeControlOptions: {
+            style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+            position: google.maps.ControlPosition.TOP_LEFT
+        }
+    });
+
+    heatmap = new google.maps.visualization.HeatmapLayer({
+        data: [],
+        map: null,
+        radius: 20
+    });
+
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            var pos = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+            };
+
+            map2.setCenter(pos);
+        }, function() {
+            handleLocationError(true, infoWindow, map.getCenter());
+        });
+    } else {
+        handleLocationError(false, infoWindow, map.getCenter());
+    }
+
+    getPoints();
+}
+
+function getPoints() {
+    $.ajax({
+        contentType: "application/json",
+        data: {},
+        method: "get",
+        url: "/api/incidents"
+    }).done(function (data) {
+        var heat = [];
+
+        $.each(data, function (key, point) {
+            heat.push(new google.maps.LatLng(point.lat, point.long));
+        });
+
+        var heatArray = new google.maps.MVCArray(heat);
+        heatmap.setData(heatArray);
+        heatmap.setMap(map2);
     });
 }
