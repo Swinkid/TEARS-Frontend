@@ -34,6 +34,7 @@ module.exports = function(passport) {
                     tempUser.password = tempUser.generateHash(password);
                     tempUser.firstname = req.body.firstname;
                     tempUser.lastname = req.body.lastname;
+                    tempUser.avatar = "//placehold.it/150x150";
 
                     tempUser.save(function(err) {
                         if (err)

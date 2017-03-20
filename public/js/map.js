@@ -128,10 +128,10 @@ function initHeatMap(){
         handleLocationError(false, infoWindow, map.getCenter());
     }
 
-    getPoints();
+    plotHeat();
 }
 
-function getPoints() {
+function plotHeat() {
     $.ajax({
         contentType: "application/json",
         data: {},
