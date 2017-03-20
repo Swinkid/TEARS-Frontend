@@ -19,6 +19,10 @@ router.get('/command', isAuthenticated, function(req, res, next) {
    res.render('user/command', { user: req.user, page_name: 'command' });
 });
 
+router.get('/heatmap', isAuthenticated, function (req, res, next) {
+   res.render('user/report_heatmap', {user: req.user,page_name : 'heatmap'}) ;
+});
+
 router.get('/users', isAuthenticated, function(req, res, next) {
 
     request(backendURL + '/api/users/list', function (error, response, body) {

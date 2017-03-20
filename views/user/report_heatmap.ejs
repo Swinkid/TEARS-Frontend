@@ -1,0 +1,18 @@
+<% include ../partials/header.ejs %>
+
+<div clas="row">
+
+	<% include ../partials/navigation.ejs %>
+
+	<div class="col-sm-9 col-md-10 content">
+		<div id="map"></div>
+	</div>
+
+</div>
+
+<script src="/js/heatmap.js"></script>
+<script async defer
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2Cik34G3VyRJnSeWNz3OuJCIHMkE6pmQ&libraries=visualization&callback=initHeatMap">
+</script>
+
+<% include ../partials/footer.ejs %>
