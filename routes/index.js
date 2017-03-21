@@ -67,7 +67,7 @@ router.post('/device/add', isAuthenticated, function (req, res, next) {
     var formData = {
         device: req.body.device,
         callsign: req.body.callsign,
-        type: req.body.type
+        resourceType: req.body.resourceType
     };
 
     request.post({url: 'http://localhost:3001/api/device/add', form: formData}, function (err, httpResponse, body) {
