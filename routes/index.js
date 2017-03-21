@@ -70,7 +70,7 @@ router.post('/device/add', isAuthenticated, function (req, res, next) {
         type: req.body.type
     };
 
-    request.post({url: 'http://localhost:3001/apasdi/device/add', form: formData}, function (err, httpResponse, body) {
+    request.post({url: 'http://localhost:3001/api/device/add', form: formData}, function (err, httpResponse, body) {
         switch(body){
             case "\"Internal Server Error\"":
             case "\"Duplicate\"":
