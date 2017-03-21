@@ -13,6 +13,7 @@
 					<th>Last Name</th>
 					<th>Username</th>
 					<th>Job Title</th>
+					<th></th>
 				</tr>
 				<% for(var i=0; i < users.length; i++) { %>
 						<tr>
@@ -21,6 +22,7 @@
 							<td><%= users[i].lastname %></td>
 							<td><%= users[i].username %></td>
 							<td><%= users[i].jobtitle %></td>
+							<td><a href="/users/edit?id=<%- users[i]._id %>">Edit</a> | <a href="/users/delete?id=<%- users[i]._id %>">Delete</a></td>
 						</tr>
 				<%}%>
 			</thead>

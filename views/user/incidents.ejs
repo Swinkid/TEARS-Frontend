@@ -5,6 +5,40 @@
 
 	<div class="col-sm-9 col-md-10 content">
 		<h1>Incidents</h1>
+
+		<form class="form-horizontal" method="get" >
+			<fieldset>
+
+				<!-- Select Basic -->
+				<div class="form-group">
+					<div class="col-md-10">
+						<select id="itype" name="type" class="form-control">
+							<option value="RTC">Road Traffic Accident</option>
+							<option value="Drugs">Drugs</option>
+							<option value="Theft">Theft</option>
+							<option value="Shoplifting">Shoplifting</option>
+							<option value="ASB">Anti Social Behaviour</option>
+							<option value="Burglary">Burglary</option>
+							<option value="VC">Vehicle Crime</option>
+							<option value="Robbery">Robbery</option>
+							<option value="CD">Criminal Damage</option>
+							<option value="PW">Possesion of Weapons</option>
+							<option value="GR">General Response</option>
+						</select>
+					</div>
+				</div>
+
+				<!-- Button (Double) -->
+				<div class="form-group">
+					<div class="col-md-10">
+						<button class="btn btn-success">Save</button>
+						<a href="/incidents" class="btn btn-danger">Reset</a>
+					</div>
+				</div>
+
+			</fieldset>
+		</form>
+
 		<table class="table table-striped">
 			<thead>
 			<tr>

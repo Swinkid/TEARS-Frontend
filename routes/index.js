@@ -41,9 +41,14 @@ router.get('/users', isAuthenticated, function(req, res, next) {
     });
 });
 
-router.get('/resources', isAuthenticated, function(req, res, next) {
+router.get('/users/delete', isAuthenticated, function (req, res, next) {
+    request({url: 'http://localhost:3001/api/users/delete', qs: {id : req.query.id}}, function (err, httpResponse, body) {
+        res.redirect('/users');
+    });
+});
 
-    request(backendURL + '/frontend/resource', function (error, response, body) {
+router.get('/resources', isAuthenticated, function(req, res, next) {
+    request({url: 'http://localhost:3001/frontend/resource', qs: {type: req.query.type}}, function (error, response, body) {
         var resources = '';
 
         if(!(body == null)) {
@@ -56,6 +61,51 @@ router.get('/resources', isAuthenticated, function(req, res, next) {
 
         res.render('user/resources', { user: req.user, page_name: 'resources', resources: resources});
     });
+});
+
+router.post('/device/add', isAuthenticated, function (req, res, next) {
+    var formData = {
+        device: req.body.device,
+        callsign: req.body.callsign,
+        type: req.body.type
+    };
+
+    request.post({url: 'http://localhost:3001/apasdi/device/add', form: formData}, function (err, httpResponse, body) {
+        switch(body){
+            case "\"Internal Server Error\"":
+            case "\"Duplicate\"":
+                res.redirect('/device/add?error=error');
+                break;
+            case "\"Update Completed\"":
+                res.redirect('/resources');
+                break;
+            default:
+                res.redirect('/device/add?error=error');
+                break;
+        }
+    }).on('error', function(err) {
+        res.redirect('/device/add?error=error');
+    });
+});
+
+router.get('/device/add', isAuthenticated, function (req, res, next) {
+    var error = '';
+
+    if(req.query.error){
+        error = req.query.error;
+    }
+
+    res.render('user/add_resource', {user: req.user, error: error, page_name: 'resources'}) ;
+});
+
+router.get('/device/delete', isAuthenticated, function (req, res, next) {
+    var id = req.query.id;
+
+   request({url: 'http://localhost:3001/api/device/delete', qs: {id : id}}, function (err, httpResponse, body) {
+       res.redirect('/resources');
+
+       console.log(body);
+   });
 });
 
 router.get('/incidents', isAuthenticated, function(req, res, next) {
