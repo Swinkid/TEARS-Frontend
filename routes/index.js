@@ -1,8 +1,6 @@
 var express = require('express');
 var passport = require('passport');
 var router = express.Router();
-var _ = require('lodash');
-var Config = require('../config');
 var request = require('request');
 
 var backendURL = "http://localhost:3001";
@@ -59,7 +57,7 @@ router.get('/resources', isAuthenticated, function(req, res, next) {
             resources = "";
         }
 
-        res.render('user/resources', { user: req.user, page_name: 'resources', resources: resources});
+        res.render('user/resources/resources', { user: req.user, page_name: 'resources', resources: resources});
     });
 });
 
@@ -95,7 +93,60 @@ router.get('/device/add', isAuthenticated, function (req, res, next) {
         error = req.query.error;
     }
 
-    res.render('user/add_resource', {user: req.user, error: error, page_name: 'resources'}) ;
+    res.render('user/resources/add_resource', {user: req.user, error: error, page_name: 'resources'}) ;
+});
+
+router.get('/device/edit', isAuthenticated, function (req,res,next) {
+    var error = '';
+
+    if(req.query.error){
+        error = req.query.error;
+        res.redirect('/resources');
+    } else {
+        if(req.query.id){
+            request.get({url: 'http://localhost:3001/api/device/get', qs: {id: req.query.id}}, function (err, httpResponse, body) {
+                switch(body){
+                    case "\"Internal Server Error\"":
+                    case "\"Error\"":
+                        res.redirect('/device/edit?error=error');
+                        break;
+                    default:
+                        res.render('user/resources/edit_resources', {user: req.user, error: error, page_name: 'resources', formResult: JSON.parse(body)});
+                        break;
+                }
+            });
+        } else {
+            error = 'error';
+            res.redirect('/resources');
+        }
+    }
+});
+
+router.post('/device/edit', isAuthenticated, function (req, res, next) {
+    var formData = {
+        id: req.body.id,
+        device: req.body.device,
+        callsign: req.body.callsign,
+        resourceType: req.body.resourceType,
+        status: req.body.status
+    };
+
+    request.post({url: 'http://localhost:3001/api/device/update', form: formData}, function (err, httpResponse, body) {
+        switch(body){
+            case "\"Internal Server Error\"":
+            case "\"Duplicate\"":
+                res.redirect('/resources?error=error');
+                break;
+            case "\"Update Completed\"":
+                res.redirect('/resources');
+                break;
+            default:
+                res.redirect('/resources?error=error');
+                break;
+        }
+    }).on('error', function(err) {
+        res.redirect('/resources?error=error');
+    });
 });
 
 router.get('/device/delete', isAuthenticated, function (req, res, next) {
@@ -121,6 +172,14 @@ router.get('/incidents', isAuthenticated, function(req, res, next) {
             }
 
             res.render('user/incidents', {user: req.user, page_name: 'incidents', incidents: incidents});
+    });
+});
+
+router.get('/incidents/delete', isAuthenticated, function (req, res, next) {
+    var id = req.query.id;
+
+    request({url: 'http://localhost:3001/api/incident/delete', qs: {id : id}}, function (err, httpResponse, body) {
+        res.redirect('/incidents');
     });
 });
 

@@ -1,0 +1,72 @@
+<% include ../../partials/header.ejs %>
+<div clas="row">
+
+	<% include ../../partials/navigation.ejs %>
+
+	<div class="col-sm-9 col-md-10 content">
+		<h1>Edit Resource</h1>
+		<form class="form-horizontal" method="post" action="/device/edit">
+			<fieldset>
+
+				<!-- Text input-->
+				<div class="form-group">
+					<label class="col-md-4 control-label" for="device">Device Number</label>
+					<div class="col-md-5">
+						<input id="device" name="device" type="text" value="<%= formResult[0].device %>" class="form-control input-md">
+
+					</div>
+				</div>
+
+				<!-- Text input-->
+				<div class="form-group">
+					<label class="col-md-4 control-label" for="callsign">Callsign</label>
+					<div class="col-md-5">
+						<input id="callsign" name="callsign" type="text"  value="<%= formResult[0].callsign %>" class="form-control input-md">
+
+					</div>
+				</div>
+
+				<!-- Select Basic -->
+				<div class="form-group">
+					<label class="col-md-4 control-label" for="type">Resource Type</label>
+					<div class="col-md-5">
+						<select id="type" name="resourceType" class="form-control">
+							<option <% if(formResult[0].type == 'Traffic') { %> selected="selected" <% } %> value="Traffic">Traffic Officer</option>
+							<option <% if(formResult[0].type == 'Armed') { %> selected="selected" <% } %> value="Armed">Armed Response</option>
+							<option <% if(formResult[0].type == 'Emergency') { %> selected="selected" <% } %> value="Emergency">Emergency Response</option>
+							<option <% if(formResult[0].type == 'General') { %> selected="selected" <% } %> value="General">General Response</option>
+						</select>
+					</div>
+				</div>
+
+				<!-- Text input-->
+				<div class="form-group">
+					<label class="col-md-4 control-label" for="status">Status</label>
+					<div class="col-md-5">
+						<select id="type" name="status" class="form-control">
+							<option <% if(formResult[0].status == 'ONLINE') { %> selected="selected" <% } %> value="ONLINE">ONLINE</option>
+							<option <% if(formResult[0].status == 'OFFLINE') { %> selected="selected" <% } %> value="OFFLINE">OFFLINE</option>
+							<option <% if(formResult[0].status == 'COMMITTED') { %> selected="selected" <% } %> value="COMMITTED">COMMITTED</option>
+							<option <% if(formResult[0].status == 'RESPONDING') { %> selected="selected" <% } %> value="RESPONDING">RESPONDING</option>
+						</select>
+					</div>
+				</div>
+
+				<input id="id" name="id" type="hidden"  value="<%= formResult[0]._id %>" class="form-control input-md">
+
+				<!-- Button -->
+				<div class="form-group">
+					<label class="col-md-4 control-label" for="submit"></label>
+					<div class="col-md-4">
+						<button id="submit" name="submit" class="btn btn-success">Submit</button>
+					</div>
+				</div>
+
+
+			</fieldset>
+		</form>
+
+	</div>
+</div>
+
+<% include ../../partials/footer.ejs %>
