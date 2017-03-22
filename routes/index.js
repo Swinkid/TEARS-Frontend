@@ -48,7 +48,7 @@ router.get('/users/delete', isAuthenticated, function (req, res, next) {
 });
 
 router.get('/resources', isAuthenticated, function(req, res, next) {
-    request({url: 'http://localhost:3001/frontend/resource', qs: {type: req.query.type}}, function (error, response, body) {
+    request({url: 'http://localhost:3001/api/resource', qs: {type: req.query.type}}, function (error, response, body) {
         var resources = '';
 
         if(!(body == null)) {

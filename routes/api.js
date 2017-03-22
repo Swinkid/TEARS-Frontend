@@ -14,7 +14,7 @@ router.get('/test', function(req, res, next){
 });
 
 router.get('/resources', function(req, res, next) {
-    request({url: "http://localhost:3001/frontend/resource", qs : req.query, json: true}, function (err, response, body) {
+    request({url: "http://localhost:3001/api/resource", qs : req.query, json: true}, function (err, response, body) {
             _.forEach(body, function (d) {
                 d['lastUpdated'] = new Date().getTime() - d['lastUpdated'];
             });
