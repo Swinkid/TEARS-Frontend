@@ -18,29 +18,36 @@ router.get('/command', isAuthenticated, function(req, res, next) {
 });
 
 router.get('/heatmap', isAuthenticated, function (req, res, next) {
-   res.render('user/report_heatmap', {user: req.user,page_name : 'heatmap'});
+    if(req.user.jobtitle === 'Manager'){
+        res.render('user/report_heatmap', {user: req.user,page_name : 'heatmap'});
+    } else {
+        res.redirect('/dashboard');
+    }
 });
 
 router.get('/users', isAuthenticated, function(req, res, next) {
+    if(req.user.jobtitle === 'Manager') {
+        request(backendURL + '/api/users/list', function (error, response, body) {
+            var users = '';
 
-    request(backendURL + '/api/users/list', function (error, response, body) {
-        var users = '';
+            if (!(body == null)) {
+                users = JSON.parse(body);
+            }
 
-        if(!(body == null)) {
-            users = JSON.parse(body);
-        }
+            if (error || response.statusCode !== 200) {
+                users = "";
+            }
 
-        if (error || response.statusCode !== 200) {
-            users = "";
-        }
+            res.render('user/users', {user: req.user, page_name: 'users', users: users});
 
-        res.render('user/users', {user: req.user, page_name: 'users', users: users});
-
-    });
+        })
+    } else {
+        res.redirect('/dashboard');
+    }
 });
 
 router.get('/users/delete', isAuthenticated, function (req, res, next) {
-    request({url: 'http://localhost:3001/api/users/delete', qs: {id : req.query.id}}, function (err, httpResponse, body) {
+    request({url: 'http://localhost:3001/api/users/delete', qs: {id : req.query.id, author: req.user.firstname + ' ' + req.user.lastname}}, function (err, httpResponse, body) {
         res.redirect('/users');
     });
 });
@@ -128,7 +135,8 @@ router.post('/device/edit', isAuthenticated, function (req, res, next) {
         device: req.body.device,
         callsign: req.body.callsign,
         resourceType: req.body.resourceType,
-        status: req.body.status
+        status: req.body.status,
+        author: req.user.firstname + ' ' + req.user.lastname
     };
 
     request.post({url: 'http://localhost:3001/api/device/update', form: formData}, function (err, httpResponse, body) {
@@ -152,7 +160,7 @@ router.post('/device/edit', isAuthenticated, function (req, res, next) {
 router.get('/device/delete', isAuthenticated, function (req, res, next) {
     var id = req.query.id;
 
-   request({url: 'http://localhost:3001/api/device/delete', qs: {id : id}}, function (err, httpResponse, body) {
+   request({url: 'http://localhost:3001/api/device/delete', qs: {id : id, author: req.user.firstname + ' ' + req.user.lastname}}, function (err, httpResponse, body) {
        res.redirect('/resources');
    });
 });
@@ -182,27 +190,27 @@ router.get('/incidents/delete', isAuthenticated, function (req, res, next) {
 });
 
 router.get('/audit', isAuthenticated, function (req, res, next) {
+    if(req.user.jobtitle === 'Manager') {
+        request({url: 'http://localhost:3001/api/auditlog'}, function (err, httpResponse, body) {
+            var audit = "Error";
 
+            if (body !== undefined) {
+                switch (body) {
+                    case "\"Internal Server Error\"":
+                        audit = [];
+                        break;
+                    default:
+                        audit = body;
+                        break;
 
-    request({url: 'http://localhost:3001/api/auditlog'}, function (err, httpResponse, body) {
-        var audit = "Error";
-
-        if(body !== undefined){
-            switch (body){
-                case "\"Internal Server Error\"":
-                    audit = [];
-                    break;
-                default:
-                    audit = body;
-                    break;
-
+                }
             }
-        }
 
-        res.render('user/audit', {user: req.user,page_name : 'audit', data: JSON.parse(audit)});
-    });
-
-
+            res.render('user/audit', {user: req.user, page_name: 'audit', data: JSON.parse(audit)});
+        });
+    } else {
+        res.redirect('/dashboard');
+    }
 });
 
 router.post('/', passport.authenticate('login', {
