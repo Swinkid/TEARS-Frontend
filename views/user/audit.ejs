@@ -1,0 +1,29 @@
+<% include ../partials/header.ejs %>
+<div clas="row">
+
+	<% include ../partials/navigation.ejs %>
+
+	<div class="col-sm-9 col-md-10 content">
+		<h1>Audit Log</h1>
+		<table class="table table-striped">
+			<thead>
+			<tr>
+				<th>Context</th>
+				<th>Action</th>
+				<th>User</th>
+				<th>Time</th>
+			</tr>
+			<%  for(var i=0; i < data.length; i++) { %>
+			<tr>
+				<td><%= data[i].context %></td>
+				<td><%= data[i].action %></td>
+				<td><%= data[i].user %></td>
+				<td><%= new Date(data[i].created_at) %></td>
+			</tr>
+			<% } %>
+			</thead>
+		</table>
+	</div>
+</div>
+
+<% include ../partials/footer.ejs %>

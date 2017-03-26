@@ -18,7 +18,7 @@ router.get('/command', isAuthenticated, function(req, res, next) {
 });
 
 router.get('/heatmap', isAuthenticated, function (req, res, next) {
-   res.render('user/report_heatmap', {user: req.user,page_name : 'heatmap'}) ;
+   res.render('user/report_heatmap', {user: req.user,page_name : 'heatmap'});
 });
 
 router.get('/users', isAuthenticated, function(req, res, next) {
@@ -154,8 +154,6 @@ router.get('/device/delete', isAuthenticated, function (req, res, next) {
 
    request({url: 'http://localhost:3001/api/device/delete', qs: {id : id}}, function (err, httpResponse, body) {
        res.redirect('/resources');
-
-       console.log(body);
    });
 });
 
@@ -178,9 +176,33 @@ router.get('/incidents', isAuthenticated, function(req, res, next) {
 router.get('/incidents/delete', isAuthenticated, function (req, res, next) {
     var id = req.query.id;
 
-    request({url: 'http://localhost:3001/api/incident/delete', qs: {id : id}}, function (err, httpResponse, body) {
+    request({url: 'http://localhost:3001/api/incident/delete', qs: {id : id, author: req.user.firstname + ' ' + req.user.lastname}}, function (err, httpResponse, body) {
         res.redirect('/incidents');
     });
+});
+
+router.get('/audit', isAuthenticated, function (req, res, next) {
+
+
+    request({url: 'http://localhost:3001/api/auditlog'}, function (err, httpResponse, body) {
+        var audit = "Error";
+
+        if(body !== undefined){
+            switch (body){
+                case "\"Internal Server Error\"":
+                    audit = [];
+                    break;
+                default:
+                    audit = body;
+                    break;
+
+            }
+        }
+
+        res.render('user/audit', {user: req.user,page_name : 'audit', data: JSON.parse(audit)});
+    });
+
+
 });
 
 router.post('/', passport.authenticate('login', {

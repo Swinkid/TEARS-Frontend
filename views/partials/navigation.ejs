@@ -24,13 +24,15 @@
 					</li>
 					<li <% if (page_name === 'dashboard') { %>class="active" <% } %>><a href="/dashboard"><span class="glyphicon glyphicon-th-large"></span> Dashboard</a></li>
 					<li <% if (page_name === 'command') { %>class="active" <% } %>><a href="/command"><span class="glyphicon glyphicon-bullhorn"></span> Command & Control</a></li>
-					<li <% if (page_name === 'users') { %>class="active" <% } %>><a href="/users"><span class="glyphicon glyphicon-user"></span> Users</a>
-					<li <% if (page_name === 'resources') { %>class="active" <% } %>><a href="/resources"><span class="glyphicon glyphicon-tag"></span> Resources</a>
-					<li <% if (page_name === 'incidents') { %>class="active" <% } %>><a href="/incidents"><span class="glyphicon glyphicon-warning-sign"></span> Incidents</a>
-					<li <% if (page_name === 'heatmap') { %>class="active" <% } %>><a href="/heatmap"><span class="glyphicon glyphicon-fire"></span> Heatmap</a>
+					<li <% if (page_name === 'users') { %>class="active" <% } %>><a href="/users"><span class="glyphicon glyphicon-user"></span> Users</a></li>
+					<li <% if (page_name === 'resources') { %>class="active" <% } %>><a href="/resources"><span class="glyphicon glyphicon-tag"></span> Resources</a></li>
+					<li <% if (page_name === 'incidents') { %>class="active" <% } %>><a href="/incidents"><span class="glyphicon glyphicon-warning-sign"></span> Incidents</a></li>
+					<li <% if (page_name === 'heatmap') { %>class="active" <% } %>><a href="/heatmap"><span class="glyphicon glyphicon-fire"></span> Heatmap</a></li>
+					<li <% if (page_name === 'audit') { %>class="active" <% } %>><a href="/audit"><span class="glyphicon glyphicon-eye-open"></span> Audit</a></li>
 					<!--<li><a href="#"><span class="glyphicon glyphicon-envelope"></span> Messages <span class="badge pull-right">42</span></a></li>-->
 					<!--<li><a href=""><span class="glyphicon glyphicon-cog"></span> Preferences</a></li>-->
 					<li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+					<li style="padding-top: 12px; padding-bottom: 12px; padding: 10px 15px;">System Status: <span class="sstatus" ></span></li>
 				</ul>
 			</div>
 		</div>

@@ -9,10 +9,6 @@ var _ = require('lodash');
 var GOOGLE_DISTANCE_MATRIX_KEY = "&key=AIzaSyATLPcyfRfm_eCIlPIHojG5jHmXcEGfGQE";
 var GOOGLE_DISTANCE_MATIRIX_URL = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial";
 
-router.get('/test', function(req, res, next){
-
-});
-
 router.get('/resources', function(req, res, next) {
     request({url: "http://localhost:3001/api/resource", qs : req.query, json: true}, function (err, response, body) {
             _.forEach(body, function (d) {
@@ -29,7 +25,8 @@ router.post('/incident/new', isAuthenticated, function (req, res, next) {
         type : req.body.type,
         status: req.body.status,
         priority : req.body.priority,
-        details : req.body.details
+        details : req.body.details,
+        author: req.user.firstname + ' ' + req.user.lastname
     };
 
     request.post({url: 'http://localhost:3001/api/incident/add', form: formData}, function (err, httpResponse, body) {
@@ -47,7 +44,8 @@ router.post('/warning/new', isAuthenticated, function (req, res, next) {
     var formData = {
         location: req.body.location,
         type: req.body.type,
-        details: req.body.details
+        details: req.body.details,
+        author: req.user.firstname + ' ' + req.user.lastname
     };
 
     request.post({url: 'http://localhost:3001/api/warning/new', form: formData}, function (err, httpResponse, body) {
@@ -59,6 +57,7 @@ router.post('/warning/new', isAuthenticated, function (req, res, next) {
 
 //TODO MAKE GET
 router.post('/warning/get', isAuthenticated, function (req, res, next) {
+
     var formData = {
         location: req.body.location
     };
