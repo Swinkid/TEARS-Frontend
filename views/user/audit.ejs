@@ -18,7 +18,7 @@
 				<td><%= data[i].context %></td>
 				<td><%= data[i].action %></td>
 				<td><%= data[i].user %></td>
-				<td><%= new Date(data[i].created_at) %></td>
+				<td><%= new Date(data[i].created_at).toUTCString() %></td>
 			</tr>
 			<% } %>
 			</thead>

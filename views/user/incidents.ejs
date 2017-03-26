@@ -55,7 +55,7 @@
 				<td><%= incidents[i].type %></td>
 				<td><%= incidents[i].status %></td>
 				<td><%= incidents[i].location %></td>
-				<td><%= iDate.getHours() + ':' + iDate.getMinutes() + ' ' + iDate.getUTCDate() + '/' + iDate.getUTCMonth() + '/' + iDate.getUTCFullYear() %></td>
+				<td><%= iDate.toUTCString() %></td>
 				<td><%= incidents[i].priority %></td>
 				<td><a href="/incidents/edit?id=<%- incidents[i]._id %>">Edit</a> | <a href="/incidents/delete?id=<%- incidents[i]._id %>">Delete</a></td>
 			</tr>
