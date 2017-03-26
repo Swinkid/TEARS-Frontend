@@ -1,0 +1,86 @@
+<% include ../../partials/header.ejs %>
+<div clas="row">
+
+	<% include ../../partials/navigation.ejs %>
+
+	<div class="col-sm-9 col-md-10 content">
+		<div class="row">
+			<div class="col-md-12">
+				<h1>New User</h1>
+			</div>
+		</div>
+		<div class="row">
+			<form action="/users/add" method="POST" class="form-horizontal">
+				<fieldset>
+					<!-- Text input-->
+					<div class="form-group">
+						<label class="col-md-4 control-label" for="username">Username</label>
+						<div class="col-md-5">
+							<input id="username" name="username" type="text" placeholder="Username" class="form-control input-md" required="">
+
+						</div>
+					</div>
+
+					<!-- Password input-->
+					<div class="form-group">
+						<label class="col-md-4 control-label" for="password">Password</label>
+						<div class="col-md-5">
+							<input id="password" name="password" type="password" placeholder="Password" class="form-control input-md" required="">
+
+						</div>
+					</div>
+
+					<!-- Text input-->
+					<div class="form-group">
+						<label class="col-md-4 control-label" for="firstname">Firstname</label>
+						<div class="col-md-5">
+							<input id="firstname" name="firstname" type="text" placeholder="Firstname" class="form-control input-md" required="">
+
+						</div>
+					</div>
+
+					<!-- Text input-->
+					<div class="form-group">
+						<label class="col-md-4 control-label" for="lastname">Lastname</label>
+						<div class="col-md-5">
+							<input id="lastname" name="lastname" type="text" placeholder="Lastname" class="form-control input-md" required="">
+
+						</div>
+					</div>
+
+					<!-- Text input-->
+					<div class="form-group">
+						<label class="col-md-4 control-label" for="email">Email</label>
+						<div class="col-md-5">
+							<input id="email" name="email" type="text" placeholder="Email Address" class="form-control input-md" required="">
+
+						</div>
+					</div>
+
+					<!-- Select Basic -->
+					<div class="form-group">
+						<label class="col-md-4 control-label" for="jobtitle">Job Title</label>
+						<div class="col-md-5">
+							<select id="jobtitle" name="jobtitle" class="form-control">
+								<option value="Call Handler">Call Handler</option>
+								<option value="Manager">Manager</option>
+								<option value="Analyst">Analyst</option>
+							</select>
+						</div>
+					</div>
+
+					<!-- Button -->
+					<div class="form-group">
+						<label class="col-md-4 control-label" for="submit"></label>
+						<div class="col-md-4">
+							<button id="submit" name="submit" class="btn btn-success">Submit</button>
+						</div>
+					</div>
+
+				</fieldset>
+			</form>
+		</div>
+	</div>
+</div>
+
+<% include ../../partials/footer.ejs %>

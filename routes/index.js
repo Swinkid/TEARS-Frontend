@@ -21,13 +21,13 @@ router.get('/heatmap', isAuthenticated, function (req, res, next) {
     if(req.user.jobtitle === 'Manager'){
         res.render('user/report_heatmap', {user: req.user,page_name : 'heatmap'});
     } else {
-        res.redirect('/dashboard');
+        res.render('user/unauthorized', {user: req.user, page_name: 'heatmap'});
     }
 });
 
 router.get('/users', isAuthenticated, function(req, res, next) {
     if(req.user.jobtitle === 'Manager') {
-        request(backendURL + '/api/users/list', function (error, response, body) {
+        request({url: 'http://localhost:3001/api/users/list', qs: {type: req.query.type}}, function (error, response, body) {
             var users = '';
 
             if (!(body == null)) {
@@ -42,13 +42,49 @@ router.get('/users', isAuthenticated, function(req, res, next) {
 
         })
     } else {
-        res.redirect('/dashboard');
+        res.render('user/unauthorized', {user: req.user, page_name: 'users'});
     }
 });
 
 router.get('/users/delete', isAuthenticated, function (req, res, next) {
     request({url: 'http://localhost:3001/api/users/delete', qs: {id : req.query.id, author: req.user.firstname + ' ' + req.user.lastname}}, function (err, httpResponse, body) {
         res.redirect('/users');
+    });
+});
+
+router.get('/users/add', isAuthenticated, function (req, res, next) {
+    res.render('user/users/add_user', {user: req.user, page_name: 'users'});
+});
+
+router.post('/users/add', isAuthenticated, function (req, res, next) {
+    var formData = {
+        username: req.body.username,
+        password: req.body.password,
+        firstname: req.body.firstname,
+        lastname: req.body.lastname,
+        email: req.body.email,
+        jobtitle: req.body.jobtitle,
+        author: req.user.firstname + ' ' + req.user.lastname
+    };
+
+    request.post({url: 'http://localhost:3001/api/users/add', form: formData}, function (err, httpResponse, body) {
+        console.log(body);
+        console.log(err);
+
+        switch(body){
+            case "\"Internal Server Error\"":
+            case "\"Duplicate\"":
+                res.redirect('/users/add?error=error');
+                break;
+            case "\"Completed\"":
+                res.redirect('/users');
+                break;
+            default:
+                res.redirect('/users/add?error=error');
+                break;
+        }
+    }).on('error', function(err) {
+        res.redirect('/users/add?error=error');
     });
 });
 
@@ -209,7 +245,7 @@ router.get('/audit', isAuthenticated, function (req, res, next) {
             res.render('user/audit', {user: req.user, page_name: 'audit', data: JSON.parse(audit)});
         });
     } else {
-        res.redirect('/dashboard');
+        res.render('user/unauthorized', {user: req.user, page_name: 'audit'});
     }
 });
 

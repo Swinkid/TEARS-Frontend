@@ -5,6 +5,34 @@
 
 	<div class="col-sm-9 col-md-10 content">
 		<h1>Users</h1>
+
+		<a href="/users/add">New User</a>
+
+		<form class="form-horizontal" method="get" >
+			<fieldset>
+
+				<!-- Select Basic -->
+				<div class="form-group">
+					<div class="col-md-10">
+						<select id="type" name="type" class="form-control">
+							<option value="Manager">Manager</option>
+							<option value="Call Handler">Call Handler</option>
+							<option value="Analyst">Analyst</option>
+						</select>
+					</div>
+				</div>
+
+				<!-- Button (Double) -->
+				<div class="form-group">
+					<div class="col-md-10">
+						<button class="btn btn-success">Save</button>
+						<a href="/incidents" class="btn btn-danger">Reset</a>
+					</div>
+				</div>
+
+			</fieldset>
+		</form>
+
 		<table class="table table-striped">
 			<thead>
 				<tr>
