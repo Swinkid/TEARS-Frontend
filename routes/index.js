@@ -249,11 +249,18 @@ router.get('/audit', isAuthenticated, function (req, res, next) {
     }
 });
 
-router.post('/', passport.authenticate('login', {
-    successRedirect: '/dashboard',
-    failureRedirect: '/',
-    failureFlash: true
-}));
+router.post('/', function(req, res, next) {
+    passport.authenticate('login', function(err, user, info) {
+        if (err) { return next(err) }
+        if (!user) {
+            return res.render('index', { message: info.message, title: 'Login' })
+        }
+        req.logIn(user, function(err) {
+            if (err) { return next(err); }
+            return res.redirect('/dashboard');
+        });
+    })(req, res, next);
+});
 
 router.post('/signup', passport.authenticate('signup', {
     successRedirect: '/dashboard',

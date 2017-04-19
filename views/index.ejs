@@ -1,16 +1,36 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-    <form method="post" action="/">
-      Username: <input type="text" name="username" /><br />
-      Password: <input type="password" name="password" /><br />
-      <input type="submit" />
-    </form>
-  </body>
-</html>
+<% include ./partials/header.ejs %>
+
+
+<div class="container container-table">
+	<div class="row vertical-center-row">
+		<div class="text-center col-md-4 col-md-offset-4">
+			<h1><%= title %></h1>
+			<% if(typeof message !== 'undefined'){ %>
+
+		<div class="alert alert-danger" role="alert">
+			<strong>Error!</strong> <%= message %>
+		</div>
+			<% } %>
+		</div>
+	</div>
+	<div class="row vertical-center-row">
+		<div class="text-center col-md-4 col-md-offset-4">
+			<form method="post" action="/">
+				<div class="form-group">
+					<label for="username">Username</label>
+					<input id="username" type="text" name="username" />
+				</div>
+				<div class="form-group">
+					<label for="password">Password</label>
+					<input id="password" type="password" name="password" />
+				</div>
+				<div class="form-group">
+					<input type="submit" />
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+
+<% include ./partials/footer.ejs %>
