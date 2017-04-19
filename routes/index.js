@@ -10,7 +10,13 @@ router.get('/', function (req, res, next) {
 });
 
 router.get('/dashboard', isAuthenticated, function(req, res, next) {
-    res.render('user/dashboard', { user : req.user, page_name: 'dashboard' });
+    request.get({url: 'http://localhost:3001/api/system/stats'}, function (err, httpResponse, body) {
+        if(!err){
+            res.render('user/dashboard', { user : req.user, page_name: 'dashboard', stats: JSON.parse(body) });
+        } else {
+            res.render('user/dashboard', { user : req.user, page_name: 'dashboard', stats: "" });
+        }
+    });
 });
 
 router.get('/command', isAuthenticated, function(req, res, next) {

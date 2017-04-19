@@ -5,6 +5,67 @@
 
 			<div class="col-sm-9 col-md-10 content">
 
+				<% if(stats != "") { %>
+
+				<% } %>
+
+				<div class="row" style="margin: 10px;">
+					<h1>TAERS Dashboard</h1>
+				</div>
+
+				<div class="row" style="text-align: center; margin: 10px;">
+					<div class="col-sm-4">
+						<div class="well">
+							<h3><i class="fa fa-warning"></i><br />Incidents</h3>
+							<strong>Open </strong> <%= stats.incidents['open'] %> -
+							<strong>Resolved </strong> <%= stats.incidents['closed'] %> -
+							<strong>Total </strong> <%= stats.incidents['total'] %>
+						</div>
+					</div>
+
+					<div class="col-sm-4">
+						<div class="well">
+							<h3><i class="fa fa-warning"></i><br />Warnings</h3>
+							<strong>Violent </strong> <%= stats.warnings['violent'] %> -
+							<strong>General </strong> <%= stats.warnings['general'] %> -
+							<strong>Weapons </strong> <%= stats.warnings['weapons'] %> -
+							<strong>Entry Code </strong> <%= stats.warnings['entrycode'] %> -
+							<strong>Total </strong> <%= stats.warnings['total'] %>
+						</div>
+					</div>
+
+					<div class="col-sm-4">
+						<div class="well">
+							<h3><i class="fa fa-user"></i><br />Users</h3>
+							<strong>Call Handlers </strong> <%= stats.users['callhandler'] %> -
+							<strong>Analysts </strong> <%= stats.users['analyst'] %> -
+							<strong>Managers </strong> <%= stats.users['managers'] %> -
+							<strong>Total </strong> <%= stats.users['total'] %>
+						</div>
+					</div>
+				</div>
+
+				<div class="row" style="margin: 10px; text-align: center;">
+					<div class="col-sm-4">
+						<div class="well">
+							<h3><i class="fa fa-warning"></i><br />Resource Status</h3>
+							<strong>Online </strong> <%= stats.resources['status'].Online %> -
+							<strong>Offline </strong> <%= stats.resources['status'].Offline %>
+						</div>
+					</div>
+
+					<div class="col-sm-4">
+						<div class="well">
+							<h3><i class="fa fa-warning"></i><br />Resource Types</h3>
+							<strong>General </strong> <%= stats.resources.general %> -
+							<strong>Traffic </strong> <%= stats.resources.traffic %> -
+							<strong>Armed </strong> <%= stats.resources.armed %> -
+							<strong>Emergency </strong> <%= stats.resources.emergency %> -
+							<strong>Total </strong> <%= stats.resources.total %>
+						</div>
+					</div>
+				</div>
+
 			</div>
 		</div>
 
