@@ -17,7 +17,7 @@
 				<div class="row" style="text-align: center; margin: 10px;">
 					<div class="col-sm-4">
 						<div class="well">
-							<h3><i class="fa fa-warning"></i><br />Incidents</h3>
+							<h3><i class="fa fa-warning"></i><br />Incidents (All Time)</h3>
 							<strong>Open </strong> <%= stats.incidents['open'] %> -
 							<strong>Resolved </strong> <%= stats.incidents['closed'] %> -
 							<strong>Total </strong> <%= stats.incidents['total'] %>
@@ -65,14 +65,27 @@
 							<strong>Total </strong> <%= stats.resources.total %>
 						</div>
 					</div>
+
+					<div class="col-sm-4">
+						<div class="well">
+							<h3><i class="fa fa-clock-o"></i><br />Average Response</h3>
+							<strong>7 Day Average: </strong> <%= stats.avgResponse %>
+
+						</div>
+					</div>
 				</div>
 
 
 
-				<div class="col-sm-12" style="height: 300px;">
-					<div class="ct-chart ct-square" style="height: 300px;"></div>
+				<div class="col-sm-6" style="height: 300px;">
+					<h3>Incidients (7 Days)</h3>
+					<div class="ct-chart ct-square" id="incidents" style="height: 300px;"></div>
 				</div>
 
+				<div class="col-sm-6" style="height: 300px;">
+					<h3>Incidient Types (7 Days)</h3>
+					<div class="ct-chart ct-square" id="incidentTypes" style="height: 300px;"></div>
+				</div>
 
 			</div>
 		</div>
@@ -83,16 +96,21 @@
 <script>
 
 	<% var fetchedWeek = [stats.week['monday'].length, stats.week['tuesday'].length, stats.week['wednesday'].length, stats.week['thursday'].length, stats.week['friday'].length, stats.week['saturday'].length, stats.week['sunday'].length] %>
+	<% var fetchedTypes = [stats.incident.types.RTC, stats.incident.types.Drugs, stats.incident.types.Theft, stats.incident.types.Shoplifting, stats.incident.types.ASB, stats.incident.types.Burglary, stats.incident.types.VC, stats.incident.types.Robbery, stats.incident.types.CD, stats.incident.types.PW, stats.incident.types.GR]; %>
 
-    var data = {
+    new Chartist.Bar('#incidentTypes', {
+        labels: ["RTC", "Drugs", "Theft", "Shoplifting", "ASB", "Burglary", "VC", "Robbery", "CD", "PW", "GR"],
+        series: [
+            [<%= fetchedWeek[0]%>, <%= fetchedWeek[1]%>, <%= fetchedWeek[2]%>, <%= fetchedWeek[3]%>, <%= fetchedWeek[4]%>, <%= fetchedWeek[5]%>, <%= fetchedWeek[6]%>, <%= fetchedWeek[7]%>, <%= fetchedWeek[8]%>, <%= fetchedWeek[9]%>, <%= fetchedWeek[10]%>]
+		]
+    });
+
+    new Chartist.Line('#incidents', {
         labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-
         series: [
             [<%= fetchedWeek[0]%>,<%= fetchedWeek[1]%>,<%= fetchedWeek[2]%>,<%= fetchedWeek[3]%>,<%= fetchedWeek[4]%>,<%= fetchedWeek[5]%>,<%= fetchedWeek[6]%>]
         ]
-    };
+    });
 
-
-    new Chartist.Bar('.ct-chart', data);
 </script>
 <% include ../partials/footer.ejs %>
