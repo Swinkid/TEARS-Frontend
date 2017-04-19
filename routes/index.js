@@ -74,9 +74,6 @@ router.post('/users/add', isAuthenticated, function (req, res, next) {
     };
 
     request.post({url: 'http://localhost:3001/api/users/add', form: formData}, function (err, httpResponse, body) {
-        console.log(body);
-        console.log(err);
-
         switch(body){
             case "\"Internal Server Error\"":
             case "\"Duplicate\"":
@@ -227,6 +224,14 @@ router.get('/incidents/delete', isAuthenticated, function (req, res, next) {
     var id = req.query.id;
 
     request({url: 'http://localhost:3001/api/incident/delete', qs: {id : id, author: req.user.firstname + ' ' + req.user.lastname}}, function (err, httpResponse, body) {
+        res.redirect('/incidents');
+    });
+});
+
+router.get('/incident/close', isAuthenticated, function (req, res, next) {
+    var id = req.query.id;
+
+    request({url: 'http://localhost:3001/api/incident/close', qs: {id : id, author: req.user.firstname + ' ' + req.user.lastname}}, function (err, httpResponse, body) {
         res.redirect('/incidents');
     });
 });

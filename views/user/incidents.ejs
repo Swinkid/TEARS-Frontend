@@ -57,7 +57,7 @@
 				<td><%= incidents[i].location %></td>
 				<td><%= iDate.toUTCString() %></td>
 				<td><%= incidents[i].priority %></td>
-				<td><a href="/incidents/edit?id=<%- incidents[i]._id %>">Edit</a> | <a href="/incidents/delete?id=<%- incidents[i]._id %>">Delete</a></td>
+				<td><a href="/incidents/edit?id=<%- incidents[i]._id %>">Edit</a> | <a href="/incidents/delete?id=<%- incidents[i]._id %>">Delete</a> <% if(incidents[i].status === "Open"){ %> | <a href="/incident/close?id=<%- incidents[i]._id %>">Close</a> <% } %></td>
 			</tr>
 			<%}%>
 			</thead>
