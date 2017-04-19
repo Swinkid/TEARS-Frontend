@@ -1,4 +1,5 @@
 <% include ../partials/header.ejs %>
+
 		<div clas="row">
 
 			<% include ../partials/navigation.ejs %>
@@ -66,7 +67,32 @@
 					</div>
 				</div>
 
+
+
+				<div class="col-sm-12" style="height: 300px;">
+					<div class="ct-chart ct-square" style="height: 300px;"></div>
+				</div>
+
+
 			</div>
 		</div>
 
+
+
+<script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+<script>
+
+	<% var fetchedWeek = [stats.week['monday'].length, stats.week['tuesday'].length, stats.week['wednesday'].length, stats.week['thursday'].length, stats.week['friday'].length, stats.week['saturday'].length, stats.week['sunday'].length] %>
+
+    var data = {
+        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+
+        series: [
+            [<%= fetchedWeek[0]%>,<%= fetchedWeek[1]%>,<%= fetchedWeek[2]%>,<%= fetchedWeek[3]%>,<%= fetchedWeek[4]%>,<%= fetchedWeek[5]%>,<%= fetchedWeek[6]%>]
+        ]
+    };
+
+
+    new Chartist.Bar('.ct-chart', data);
+</script>
 <% include ../partials/footer.ejs %>

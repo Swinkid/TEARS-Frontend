@@ -12,6 +12,11 @@
     display: none;
 }
 
+.ct-square .ct-bar {
+    stroke-width: 50px
+}
+
+
 #incidentDetails, #incidentWarnings, #incidentDispatch {
     padding: 10px;
     border-left: 1px solid #ddd;
