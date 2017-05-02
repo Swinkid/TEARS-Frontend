@@ -6,14 +6,14 @@
 
 			<div class="col-sm-9 col-md-10 content">
 
-				<% if(stats != "") { %>
 
-				<% } %>
+
+
 
 				<div class="row" style="margin: 10px;">
 					<h1>TAERS Dashboard</h1>
 				</div>
-
+                <% if(stats != "") { %>
 				<div class="row" style="text-align: center; margin: 10px;">
 					<div class="col-sm-4">
 						<div class="well">
@@ -87,11 +87,13 @@
 					<div class="ct-chart ct-square" id="incidentTypes" style="height: 300px;"></div>
 				</div>
 
+                <% } %>
+
 			</div>
 		</div>
 
 
-
+<% if(stats != "") { %>
 <script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
 <script>
 
@@ -113,4 +115,5 @@
     });
 
 </script>
+<% } %>
 <% include ../partials/footer.ejs %>

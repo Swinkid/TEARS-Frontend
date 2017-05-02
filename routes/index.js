@@ -253,7 +253,12 @@ router.get('/audit', isAuthenticated, function (req, res, next) {
                 }
             }
 
-            res.render('user/audit', {user: req.user, page_name: 'audit', data: JSON.parse(audit)});
+            if(!err){
+                res.render('user/audit', {user: req.user, page_name: 'audit', data: JSON.parse(audit)});
+            } else {
+                res.render('user/audit', {user: req.user, page_name: 'audit', data: ""});
+            }
+
         });
     } else {
         res.render('user/unauthorized', {user: req.user, page_name: 'audit'});
