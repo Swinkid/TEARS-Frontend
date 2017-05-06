@@ -12,6 +12,10 @@ $(document).ready(function () {
     $("#warningmarkersform").submit(function(e){
         e.preventDefault();
     });
+
+    $("#go").submit(function(e){
+        e.preventDefault();
+    });
 });
 
 
@@ -231,3 +235,15 @@ function globalUpdate(){
         refreshResourcesTable(result);
     });
 }
+
+$("#singlebutton").click(function () {
+    var filter = [];
+
+    var $checked = $(".incident-filter:checked"),
+        result = $checked.map(function () {
+            var $this = $(this);
+            return filter.push($this.val());
+        });
+
+    alert(JSON.stringify(filter));
+});
