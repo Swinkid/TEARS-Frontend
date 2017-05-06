@@ -16,6 +16,10 @@
     stroke-width: 50px
 }
 
+.contentHeader {
+    margin-left: 10px;
+    margin-right: 10px;
+}
 
 #incidentDetails, #incidentWarnings, #incidentDispatch {
     padding: 10px;

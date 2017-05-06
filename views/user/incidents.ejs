@@ -4,14 +4,14 @@
 	<% include ../partials/navigation.ejs %>
 
 	<div class="col-sm-9 col-md-10 content">
-		<h1>Incidents</h1>
+		<h1 class="contentHeader">Incidents</h1>
 
-		<form class="form-horizontal" method="get" >
+		<form class="form-horizontal contentHeader" method="get" >
 			<fieldset>
 
 				<!-- Select Basic -->
 				<div class="form-group">
-					<div class="col-md-10">
+					<div class="col-md-12">
 						<select id="itype" name="type" class="form-control">
 							<option value="RTC">Road Traffic Accident</option>
 							<option value="Drugs">Drugs</option>
@@ -30,7 +30,7 @@
 
 				<!-- Button (Double) -->
 				<div class="form-group">
-					<div class="col-md-10">
+					<div class="col-md-12">
 						<button class="btn btn-success">Save</button>
 						<a href="/incidents" class="btn btn-danger">Reset</a>
 					</div>

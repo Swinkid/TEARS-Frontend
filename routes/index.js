@@ -289,10 +289,6 @@ router.get('/logout', function(req, res){
     res.redirect('/');
 });
 
-router.get('/signup', function(req, res) {
-    res.render('signup.ejs', { message: req.flash('signupMessage') });
-});
-
 module.exports = router;
 
 function isAuthenticated(req, res, next) {

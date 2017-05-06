@@ -4,11 +4,11 @@
 	<% include ../partials/navigation.ejs %>
 
 	<div class="col-sm-9 col-md-10 content">
-		<h1>Users</h1>
+		<h1 class="contentHeader">Users</h1>
 
-		<a href="/users/add">New User</a>
+		<p class="contentHeader"><a href="/users/add">New User</a></p>
 
-		<form class="form-horizontal" method="get" >
+		<form class="form-horizontal contentHeader" method="get" >
 			<fieldset>
 
 				<!-- Select Basic -->
@@ -26,7 +26,7 @@
 				<div class="form-group">
 					<div class="col-md-10">
 						<button class="btn btn-success">Save</button>
-						<a href="/incidents" class="btn btn-danger">Reset</a>
+						<a href="/users" class="btn btn-danger">Reset</a>
 					</div>
 				</div>
 
