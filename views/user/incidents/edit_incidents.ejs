@@ -1,0 +1,90 @@
+<% include ../../partials/header.ejs %>
+<div clas="row">
+
+    <% include ../../partials/navigation.ejs %>
+
+
+    <div class="col-sm-9 col-md-10 content">
+        <h1>Edit Incident</h1>
+
+        <form class="form-horizontal" action="/incident/edit" method="post">
+            <fieldset>
+
+                <input id="iid" name="iid" type="hidden" class="form-control" required="" value="<%= formResult._id %>">
+
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="ilocation">Location</label>
+                    <div class="col-md-5">
+                        <input id="ilocation" name="ilocation" type="text" placeholder="location" class="form-control" required="" value="<%= formResult.location %>">
+                    </div>
+                </div>
+
+                <!-- Select Basic -->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="itype">Type</label>
+                    <div class="col-md-5">
+                        <select id="itype" name="itype" class="form-control">
+                            <option value="RTC" <% if(formResult.type == 'RTC') { %> selected="selected" <% } %>>Road Traffic Accident</option>
+                            <option value="Drugs" <% if(formResult.type == 'Drugs') { %> selected="selected" <% } %>>Drugs</option>
+                            <option value="Theft" <% if(formResult.type == 'Theft') { %> selected="selected" <% } %>>Theft</option>
+                            <option value="Shoplifting"<% if(formResult.type == 'Shoplifting') { %> selected="selected" <% } %>>Shoplifting</option>
+                            <option value="ASB" <% if(formResult.type == 'ASB') { %> selected="selected" <% } %>>Anti Social Behaviour</option>
+                            <option value="Burglary" <% if(formResult.type == 'Burglary') { %> selected="selected" <% } %>>Burglary</option>
+                            <option value="VC" <% if(formResult.type == 'VC') { %> selected="selected" <% } %>>Vehicle Crime</option>
+                            <option value="Robbery" <% if(formResult.type == 'Robbery') { %> selected="selected" <% } %>>Robbery</option>
+                            <option value="CD" <% if(formResult.type == 'CD') { %> selected="selected" <% } %>>Criminal Damage</option>
+                            <option value="PW" <% if(formResult.type == 'PW') { %> selected="selected" <% } %>>Possesion of Weapons</option>
+                            <option value="GR" <% if(formResult.type == 'GR') { %> selected="selected" <% } %>>General Response</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Select Basic -->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="istatus">Status</label>
+                    <div class="col-md-5">
+                        <select id="istatus" name="istatus" class="form-control">
+                            <option value="Open" <% if(formResult.status == 'Open') { %> selected="selected" <% } %>>Open</option>
+                            <option value="Comittied" <% if(formResult.status == 'Comittied') { %> selected="selected" <% } %>>Comittied</option>
+                            <option value="Resolved" <% if(formResult.status == 'Resolved') { %> selected="selected" <% } %>>Resolved</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Select Basic -->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="selectbasic">Priority</label>
+                    <div class="col-md-5">
+                        <select id="ipriority" name="selectbasic" class="form-control">
+                            <option value="Critical" <% if(formResult.priority == 'Critical') { %> selected="selected" <% } %>>Critical</option>
+                            <option value="High" <% if(formResult.priority == 'High') { %> selected="selected" <% } %>>High</option>
+                            <option value="Medium" <% if(formResult.priority == 'Medium') { %> selected="selected" <% } %>>Medium</option>
+                            <option value="Low" <% if(formResult.priority == 'Low') { %> selected="selected" <% } %>>Low</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Textarea -->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="idetails">Details</label>
+                    <div class="col-md-5">
+                        <textarea class="form-control" id="idetails" name="idetails"><%= formResult.details %></textarea>
+                    </div>
+                </div>
+
+                <!-- Button (Double) -->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="Save"></label>
+                    <div class="col-md-5">
+                        <button name="Save" class="btn btn-success">Save</button>
+                    </div>
+                </div>
+
+            </fieldset>
+        </form>
+
+    </div>
+</div>
+
+<% include ../../partials/footer.ejs %>

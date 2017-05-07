@@ -216,7 +216,7 @@ router.get('/incidents', isAuthenticated, function(req, res, next) {
                 incidents = body;
             }
 
-            res.render('user/incidents', {user: req.user, page_name: 'incidents', incidents: incidents});
+            res.render('user/incidents/incidents', {user: req.user, page_name: 'incidents', incidents: incidents});
     });
 });
 
@@ -233,6 +233,61 @@ router.get('/incident/close', isAuthenticated, function (req, res, next) {
 
     request({url: 'http://localhost:3001/api/incident/close', qs: {id : id, author: req.user.firstname + ' ' + req.user.lastname}}, function (err, httpResponse, body) {
         res.redirect('/incidents');
+    });
+});
+
+router.get('/incident/edit', isAuthenticated, function (req,res,next) {
+    var error = '';
+
+    if(req.query.error){
+        error = req.query.error;
+        res.redirect('/incidents');
+    } else {
+        if(req.query.id){
+            request.get({url: 'http://localhost:3001/api/incident', qs: {id: req.query.id}}, function (err, httpResponse, body) {
+                switch(body){
+                    case "\"Internal Server Error\"":
+                    case "\"Error\"":
+                        res.redirect('/incidents/edit?error=error');
+                        break;
+                    default:
+                        res.render('user/incidents/edit_incidents', {user: req.user, error: error, page_name: 'incidents', formResult: JSON.parse(body)});
+                        break;
+                }
+            });
+        } else {
+            error = 'error';
+            res.redirect('/incidents');
+        }
+    }
+});
+
+router.post('/incident/edit', isAuthenticated, function (req, res, next) {
+    var formData = {
+        id: req.body.iid,
+        location: req.body.ilocation,
+        type : req.body.itype,
+        status: req.body.istatus,
+        priority : req.body.selectbasic,
+        details : req.body.idetails,
+        author: req.user.firstname + ' ' + req.user.lastname
+    };
+
+    request.post({url: 'http://localhost:3001/api/incident/update', form: formData}, function (err, httpResponse, body) {
+        switch(body){
+            case "\"Internal Server Error\"":
+            case "\"Duplicate\"":
+                res.redirect('/incidents?error=error');
+                break;
+            case "\"Update Completed\"":
+                res.redirect('/incidents');
+                break;
+            default:
+                res.redirect('/incidents?error=error');
+                break;
+        }
+    }).on('error', function(err) {
+        res.redirect('/incidents?error=error');
     });
 });
 
