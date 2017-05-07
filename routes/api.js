@@ -114,6 +114,19 @@ router.get('/incidents', function (req, res, next) {
     });
 });
 
+router.get('/status', function(req, res){
+    request.get({url: 'http://localhost:3001/api/status'}, function (err, httpResponse, body) {
+        switch(body){
+            case "\"OK\"":
+                res.send(JSON.stringify("OK"));
+                break;
+            default:
+                res.send(JSON.stringify("ERROR"));
+                break;
+        }
+    });
+});
+
 module.exports = router;
 
 function isAuthenticated(req, res, next) {

@@ -19,7 +19,8 @@
 							<h4>
 								Dashboard
 							</h4>
-							<%= user.firstname %> <%= user.lastname %> - <%- user.jobtitle %>
+							<%= user.firstname %> <%= user.lastname %> - <%- user.jobtitle %> <br />
+							<p id="systemstatus"></p>
 						</a>
 					</li>
 					<li <% if (page_name === 'dashboard') { %>class="active" <% } %>><a href="/dashboard"><span class="glyphicon glyphicon-th-large"></span> Dashboard</a></li>

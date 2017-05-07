@@ -16,6 +16,22 @@ $(document).ready(function () {
     $("#go").submit(function(e){
         e.preventDefault();
     });
+
+    $.ajax({
+        contentType: "application/json",
+        method: "get",
+        url: "/api/status"
+    }).done(function (data) {
+
+        if(data === "\"OK\"") {
+            $("#systemstatus").empty();
+            $("#systemstatus").append("System Status: <span style=\"background-color: green\" class=\"badge\">OK</span>");
+        } else {
+            $("#systemstatus").empty();
+            $("#systemstatus").append("System Status: <span style=\"background-color: red\" class=\"badge\">ERROR</span>");
+        }
+
+    });
 });
 
 
