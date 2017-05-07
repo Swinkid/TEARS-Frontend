@@ -134,7 +134,7 @@ function initHeatMap(){
 function plotHeat() {
     $.ajax({
         contentType: "application/json",
-        data: {},
+        data: { filter: JSON.stringify(getHeatmapFilters()) },
         method: "get",
         url: "/api/incidents"
     }).done(function (data) {

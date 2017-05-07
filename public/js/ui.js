@@ -237,6 +237,10 @@ function globalUpdate(){
 }
 
 $("#singlebutton").click(function () {
+    plotHeat();
+});
+
+function getHeatmapFilters() {
     var filter = [];
 
     var $checked = $(".incident-filter:checked"),
@@ -245,5 +249,5 @@ $("#singlebutton").click(function () {
             return filter.push($this.val());
         });
 
-    alert(JSON.stringify(filter));
-});
+    return filter;
+}
